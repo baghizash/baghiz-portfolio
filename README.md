@@ -2,7 +2,7 @@
 
 Website portofolio Data Analyst Baghiz Asshiddiqie Arasya. Satu halaman statis berisi 12 proyek analisis data yang sudah selesai, keahlian, sertifikat, dan kontak. Dibangun dengan HTML, CSS, dan JavaScript murni. Tanpa framework, tanpa proses build, tanpa pelacak.
 
-Live: aktifkan GitHub Pages dari branch `main` folder root untuk menerbitkannya di `https://baghizash.github.io/baghiz-portfolio/`.
+Live: https://baghizash.github.io/baghiz-portfolio/ (GitHub Pages dari branch `main`, folder root).
 
 ## Menjalankan di komputer lokal
 
@@ -35,13 +35,13 @@ npx serve .
 |---|---|
 | `index.html` | Seluruh konten halaman: hero, tentang, proyek unggulan, arsip 12 proyek, keahlian, sertifikat, kontak |
 | `styles.css` | Sistem desain lengkap, termasuk layout tablet dan ponsel |
-| `script.js` | Menu ponsel, filter dan pencarian arsip proyek, chart inflasi dari data BPS, dialog sertifikat, tombol salin email |
-| `DESIGN.md` | Arah desain tertulis: konsep arsip data, palet, tipografi, dan alasan setiap keputusan |
+| `script.js` | Menu ponsel, tilt ID badge, slider proyek unggulan, filter dan pencarian arsip proyek, chart inflasi dari data BPS, dialog sertifikat, tombol salin email |
+| `DESIGN.md` | Arah desain tertulis: gaya dark ID card dari referensi video, palet, tipografi, gerak, dan alasan setiap keputusan |
 | `assets/README.md` | Petunjuk memasukkan foto profil dan gambar sertifikat ke placeholder yang sudah disiapkan |
 
 ## Mengganti foto dan sertifikat
 
-Tempat foto profil ada di hero, berupa plat berlabel "Tempat foto Baghiz". Tempat pratinjau sertifikat ada di setiap baris section Sertifikat. Petunjuk langkah demi langkah ada di `assets/README.md`.
+Tempat foto profil ada di hero, di dalam ID badge gantung, berlabel "Tempat foto Baghiz". Tempat pratinjau sertifikat ada di setiap baris section Sertifikat. Petunjuk langkah demi langkah ada di `assets/README.md`.
 
 ## Data di halaman ini
 
