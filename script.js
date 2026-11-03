@@ -1,6 +1,6 @@
 // Portofolio Baghiz. Semua interaksi di halaman ini benar benar bekerja:
-// menu ponsel, tilt ID badge, slider proyek unggulan, dialog sertifikat,
-// dan tombol salin email.
+// menu ponsel, tilt ID badge, slider proyek unggulan, kartu kredensial
+// berputar, dan tombol salin email.
 
 (function () {
   "use strict";
@@ -26,98 +26,172 @@
     }
   });
 
-  /* Dialog sertifikat */
+  /* Kartu kredensial: berputar terus sampai satu kartu diklik.
+     Kartu yang dipilih berhenti di tengah, fokus, dan detailnya
+     tampil di panel bawah. Tombol Putar lagi melanjutkan putaran. */
   var CERTS = {
     "ibm-da": {
       title: "IBM Data Analyst Professional Certificate",
       issuer: "IBM, lewat Coursera. 11 course, selesai 2026.",
-      body: "Materi meliputi Excel untuk data cleaning dan dashboard, Python dengan pandas dan NumPy, SQL dan relational database, data visualization dengan Matplotlib dan Seaborn, statistics, exploratory data analysis, dan capstone. Capstone saya menganalisis tren teknologi dari survei 65.437 developer dan hasilnya terdokumentasi sebagai repositori terpisah di GitHub.",
+      short: "Excel, Python, SQL, data visualization, dan capstone dari 65.437 baris survei developer.",
       verify: "https://coursera.org/verify/professional-cert/DZY2HKM0VCLU"
     },
     "google-da": {
       title: "Google Data Analytics Professional Certificate",
       issuer: "Google, lewat Coursera. 8 course.",
-      body: "Materi meliputi foundations of data analytics, proses ask dan prepare data, SQL dan BigQuery, spreadsheet, dasar R, Tableau untuk data visualization, dan capstone case study lengkap dari data cleaning sampai presentation temuan.",
+      short: "Foundations of data analytics, SQL dan BigQuery, spreadsheet, R, Tableau, dan capstone case study.",
       verify: ""
     },
     "meta-da": {
       title: "Meta Data Analyst Professional Certificate",
       issuer: "Meta, lewat Coursera. 5 course.",
-      body: "Materi meliputi foundations of data analytics, data analysis dengan spreadsheet dan SQL, Python for analytics, foundations of statistics, dan data management, termasuk cara data disimpan, diatur, dan dijaga kualitasnya.",
+      short: "Spreadsheet dan SQL, Python for analytics, foundations of statistics, dan data management.",
       verify: ""
     },
     "dsf": {
       title: "Data Science Foundations",
       issuer: "University of London, lewat Coursera. 8 course, selesai 2026.",
-      body: "Materi meliputi Python for data science, statistics, clustering, dan machine learning. Proyek yang saya buat meliputi exploratory data analysis pada banknote authentication dengan 1.372 baris data dan capstone bike sharing prediction, keduanya terdokumentasi di GitHub beserta modul belajarnya.",
+      short: "Python for data science, statistics, clustering, machine learning, dan capstone bike sharing prediction.",
       verify: "https://coursera.org/verify/specialization/NRPSEHDEBX9V"
     },
     "ibm-ba": {
       title: "IBM Business Analyst Professional Certificate",
       issuer: "IBM, lewat Coursera.",
-      body: "Materi meliputi process modeling, requirements gathering dan documentation, project management dan stakeholder management, dan capstone project tentang operational efficiency di rumah sakit multi specialty.",
+      short: "Process modeling, requirements gathering, stakeholder management, dan capstone project analisis bisnis.",
       verify: ""
     },
     "excel-macq": {
       title: "Excel Skills for Data Analytics and Visualization",
       issuer: "Macquarie University, lewat Coursera.",
-      body: "Materi meliputi Advanced Excel untuk data cleaning dan data preparation, analysis dengan formula dan pivot table, serta data visualization dan dashboard untuk kebutuhan analytics.",
+      short: "Advanced Excel untuk data cleaning, data preparation, analysis, dan data visualization.",
       verify: ""
     },
     "michigan": {
       title: "More Applied Data Science with Python",
       issuer: "University of Michigan, lewat Coursera.",
-      body: "Coursework meliputi pattern mining dan association rules, recommender systems dengan SVD, network analysis dan centrality, science mapping dan community detection, diffusion dan epidemic models, serta applied machine learning. Setiap course menghasilkan repositori proyek dan modul tertulis di GitHub.",
+      short: "Coursework: pattern mining, recommender systems, network analysis, dan applied machine learning.",
       verify: ""
     },
     "asu": {
       title: "Learn English Now",
       issuer: "Arizona State University, lewat Coursera. 3 course.",
-      body: "Materi meliputi foundations of critical thinking, problem solving dan prediction, dan critical thinking strategies. Kemampuan ini terpakai langsung saat analisis data, terutama saat merumuskan pertanyaan yang tepat sebelum mengolah angka.",
+      short: "Foundations of critical thinking, problem solving, dan prediction strategies.",
       verify: ""
     }
   };
-  var dialog = document.getElementById("certDialog");
-  var dialogTitle = document.getElementById("certDialogTitle");
-  var dialogIssuer = document.getElementById("certDialogIssuer");
-  var dialogBody = document.getElementById("certDialogBody");
-  var dialogVerify = document.getElementById("certDialogVerify");
-  var lastTrigger = null;
-  document.querySelectorAll(".cert-open").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var cert = CERTS[btn.getAttribute("data-cert")];
-      if (!cert) return;
-      lastTrigger = btn;
-      dialogTitle.textContent = cert.title;
-      dialogIssuer.textContent = cert.issuer;
-      dialogBody.textContent = cert.body;
-      dialogVerify.innerHTML = "";
-      if (cert.verify) {
-        var link = document.createElement("a");
-        link.href = cert.verify;
-        link.target = "_blank";
-        link.rel = "noopener";
-        link.textContent = "Verifikasi kredensial di Coursera";
-        dialogVerify.appendChild(link);
-      } else {
-        dialogVerify.textContent = "File PDF sertifikat tersedia dan bisa diminta lewat email.";
-      }
-      if (typeof dialog.showModal === "function") {
-        dialog.showModal();
-      } else {
-        dialog.setAttribute("open", "");
+
+  var credStage = document.getElementById("credStage");
+  var credViewport = document.getElementById("credViewport");
+  var credTrack = document.getElementById("credTrack");
+  var credSet = document.getElementById("credSet");
+  var credDetail = document.getElementById("credDetail");
+  var focusedCard = null;
+
+  function resetCredDetail() {
+    credDetail.innerHTML = "";
+    var hint = document.createElement("p");
+    hint.className = "cred-detail-hint";
+    hint.textContent = "Kartu berputar otomatis. Klik salah satu kartu untuk fokus ke kredensial itu dan membaca detail singkatnya di sini.";
+    credDetail.appendChild(hint);
+  }
+
+  function resumeCredLoop() {
+    focusedCard = null;
+    credStage.classList.remove("is-focused");
+    credTrack.style.transform = "";
+    Array.prototype.forEach.call(credTrack.querySelectorAll(".cred-card"), function (card) {
+      card.classList.remove("is-focused");
+      card.classList.remove("is-dim");
+    });
+    resetCredDetail();
+  }
+
+  function centerCredCard(card) {
+    var x = credViewport.clientWidth / 2 - (card.offsetLeft + card.offsetWidth / 2);
+    credTrack.style.transform = "translateX(" + x + "px)";
+  }
+
+  function focusCredCard(card) {
+    var cert = CERTS[card.getAttribute("data-cert")];
+    if (!cert) return;
+    focusedCard = card;
+    credStage.classList.add("is-focused");
+    Array.prototype.forEach.call(credSet.querySelectorAll(".cred-card"), function (other) {
+      other.classList.toggle("is-focused", other === card);
+      other.classList.toggle("is-dim", other !== card);
+    });
+    centerCredCard(card);
+
+    credDetail.innerHTML = "";
+    var title = document.createElement("h3");
+    title.textContent = cert.title;
+    var issuer = document.createElement("p");
+    issuer.className = "cred-detail-issuer";
+    issuer.textContent = cert.issuer;
+    var body = document.createElement("p");
+    body.className = "cred-detail-body";
+    body.textContent = cert.short;
+    var actions = document.createElement("div");
+    actions.className = "cred-detail-actions";
+    if (cert.verify) {
+      var link = document.createElement("a");
+      link.className = "btn btn-primary";
+      link.href = cert.verify;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = "Verifikasi di Coursera";
+      actions.appendChild(link);
+    } else {
+      var note = document.createElement("span");
+      note.className = "cred-detail-note";
+      note.textContent = "File PDF sertifikat bisa diminta lewat email.";
+      actions.appendChild(note);
+    }
+    var resumeBtn = document.createElement("button");
+    resumeBtn.type = "button";
+    resumeBtn.className = "btn btn-dark";
+    resumeBtn.textContent = "Putar lagi";
+    resumeBtn.addEventListener("click", resumeCredLoop);
+    actions.appendChild(resumeBtn);
+    credDetail.appendChild(title);
+    credDetail.appendChild(issuer);
+    credDetail.appendChild(body);
+    credDetail.appendChild(actions);
+  }
+
+  if (credStage && credViewport && credTrack && credSet && credDetail) {
+    // Gandakan set kartu supaya putarannya menyambung tanpa jeda.
+    var credClone = credSet.cloneNode(true);
+    credClone.removeAttribute("id");
+    credClone.setAttribute("aria-hidden", "true");
+    Array.prototype.forEach.call(credClone.querySelectorAll("button"), function (btn) {
+      btn.tabIndex = -1;
+    });
+    credTrack.appendChild(credClone);
+    credViewport.classList.add("is-loop");
+
+    credTrack.addEventListener("click", function (event) {
+      var btn = event.target.closest(".cred-card");
+      if (!btn) return;
+      var key = btn.getAttribute("data-cert");
+      var originals = credSet.querySelectorAll(".cred-card");
+      for (var i = 0; i < originals.length; i += 1) {
+        if (originals[i].getAttribute("data-cert") === key) {
+          focusCredCard(originals[i]);
+          break;
+        }
       }
     });
-  });
-  document.getElementById("certDialogClose").addEventListener("click", function () {
-    dialog.close();
-  });
-  dialog.addEventListener("click", function (event) {
-    if (event.target === dialog) dialog.close();
-  });
-  dialog.addEventListener("close", function () {
-    if (lastTrigger) lastTrigger.focus();
-  });
+
+    var credResizeTimer = null;
+    window.addEventListener("resize", function () {
+      if (!focusedCard) return;
+      window.clearTimeout(credResizeTimer);
+      credResizeTimer = window.setTimeout(function () {
+        centerCredCard(focusedCard);
+      }, 150);
+    });
+  }
 
   /* Salin alamat email */
   var copyButton = document.getElementById("copyEmail");
