@@ -367,7 +367,6 @@ if (projStage && projViewport && projTrack && projSet && projDetail) {
   const stage = document.getElementById("expStage");
   if (!stage) return;
   const slides = Array.from(stage.querySelectorAll("[data-exp-slide]"));
-  const status = document.getElementById("expStatus");
   const total = slides.length;
   let active = 0;
   let wheelLock = false;
@@ -391,15 +390,9 @@ if (projStage && projViewport && projTrack && projSet && projDetail) {
       slide.classList.toggle("is-active", off === 0);
       slide.setAttribute("aria-hidden", off === 0 ? "false" : "true");
     });
-    if (status) status.textContent = (active + 1) + " / " + total;
   }
   function go(dir) { active = (active + dir + total) % total; render(); }
   function goTo(i) { active = ((i % total) + total) % total; render(); }
-
-  const prevBtn = document.getElementById("expPrev");
-  const nextBtn = document.getElementById("expNext");
-  if (prevBtn) prevBtn.addEventListener("click", function () { go(-1); });
-  if (nextBtn) nextBtn.addEventListener("click", function () { go(1); });
 
   slides.forEach(function (slide, i) {
     slide.addEventListener("click", function () { if (i !== active) goTo(i); });
