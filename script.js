@@ -426,18 +426,17 @@ if (projStage && projViewport && projTrack && projSet && projDetail) {
      dan sesuaikan tinggi panggung dengannya. */
   const cards = slides.map(function (slide) { return slide.querySelector(".exp-card"); });
   function equalize() {
+    /* Tinggi seragam = kartu terpanjang dalam keadaan ringkas
+       (deskripsi dibatasi 2 baris lewat CSS). Dengan begitu semua
+       kartu sama tinggi, deskripsi selalu tampil 2 baris, dan tag
+       skills tidak pernah terdorong keluar kartu. */
     let max = 0;
     cards.forEach(function (card) {
       card.style.height = "auto";
       max = Math.max(max, card.offsetHeight);
     });
-    /* Sesuai permintaan Baghiz: tinggi kartu dipotong jadi setengah
-       dari tinggi alami terpanjang, dengan lantai aman agar tag
-       skills tetap terlihat (376px desktop, 340px ponsel). */
-    const floor = window.innerWidth <= 720 ? 340 : 376;
-    const target = Math.max(floor, Math.round(max / 2));
-    cards.forEach(function (card) { card.style.height = target + "px"; });
-    stage.style.height = (target + 150) + "px";
+    cards.forEach(function (card) { card.style.height = max + "px"; });
+    stage.style.height = (max + 150) + "px";
   }
 
   let expResizeTimer = null;
