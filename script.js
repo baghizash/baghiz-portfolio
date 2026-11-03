@@ -1,6 +1,6 @@
 // Portofolio Baghiz. Semua interaksi di halaman ini benar benar bekerja:
-// menu ponsel, filter dan pencarian arsip proyek, chart inflasi dari data BPS,
-// dialog sertifikat, dan tombol salin email.
+// menu ponsel, tilt ID badge, slider proyek unggulan, dialog sertifikat,
+// dan tombol salin email.
 
 (function () {
   "use strict";
@@ -25,124 +25,6 @@
       menuButton.focus();
     }
   });
-
-  /* Filter dan pencarian arsip proyek */
-  var filterButtons = Array.prototype.slice.call(document.querySelectorAll(".filter-btn"));
-  var searchInput = document.getElementById("projectSearch");
-  var rows = Array.prototype.slice.call(document.querySelectorAll(".archive-row"));
-  var status = document.getElementById("archiveStatus");
-  var emptyBox = document.getElementById("archiveEmpty");
-  var activeFilter = "semua";
-
-  function applyArchiveFilter() {
-    var query = searchInput.value.trim().toLowerCase();
-    var visible = 0;
-    rows.forEach(function (row) {
-      var matchesFilter = activeFilter === "semua" || row.getAttribute("data-cat") === activeFilter;
-      var haystack = (row.textContent + " " + (row.getAttribute("data-text") || "")).toLowerCase();
-      var matchesSearch = !query || haystack.indexOf(query) !== -1;
-      var show = matchesFilter && matchesSearch;
-      row.hidden = !show;
-      if (show) visible += 1;
-    });
-    status.textContent = "Menampilkan " + visible + " dari " + rows.length + " proyek.";
-    emptyBox.hidden = visible !== 0;
-  }
-  filterButtons.forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      filterButtons.forEach(function (other) {
-        other.classList.remove("is-active");
-        other.setAttribute("aria-pressed", "false");
-      });
-      btn.classList.add("is-active");
-      btn.setAttribute("aria-pressed", "true");
-      activeFilter = btn.getAttribute("data-filter");
-      applyArchiveFilter();
-    });
-  });
-  searchInput.addEventListener("input", applyArchiveFilter);
-  document.getElementById("resetFilter").addEventListener("click", function () {
-    searchInput.value = "";
-    filterButtons.forEach(function (other) {
-      var isAll = other.getAttribute("data-filter") === "semua";
-      other.classList.toggle("is-active", isAll);
-      other.setAttribute("aria-pressed", isAll ? "true" : "false");
-    });
-    activeFilter = "semua";
-    applyArchiveFilter();
-    searchInput.focus();
-  });
-
-  /* Chart inflasi tahunan. Angka Desember year on year dari BPS,
-     titik terakhir adalah September 2026. Sama dengan proyek Inflasi Indonesia. */
-  var inflationData = [
-    { label: "2019", value: 2.72 },
-    { label: "2020", value: 1.68 },
-    { label: "2021", value: 1.87 },
-    { label: "2022", value: 5.51 },
-    { label: "2023", value: 2.61 },
-    { label: "2024", value: 1.57 },
-    { label: "2025", value: 2.92 },
-    { label: "Sep 2026", value: 3.28 }
-  ];
-  var canvas = document.getElementById("inflationChart");
-  function drawChart() {
-    if (!canvas || !canvas.getContext) return;
-    var cssWidth = canvas.clientWidth || 1120;
-    var cssHeight = Math.max(260, Math.round(cssWidth * 0.375));
-    var dpr = window.devicePixelRatio || 1;
-    canvas.width = Math.round(cssWidth * dpr);
-    canvas.height = Math.round(cssHeight * dpr);
-    var ctx = canvas.getContext("2d");
-    ctx.scale(dpr, dpr);
-    var W = cssWidth, H = cssHeight;
-    var padL = 8, padR = 8, padT = 34, padB = 34;
-    var chartW = W - padL - padR;
-    var chartH = H - padT - padB;
-    var max = 6;
-    var slot = chartW / inflationData.length;
-    var barW = Math.min(72, slot * 0.58);
-    ctx.clearRect(0, 0, W, H);
-    // Garis sasaran Bank Indonesia 2,5 persen plus minus 1, batas atas 3,5 persen.
-    var targetY = padT + chartH - (3.5 / max) * chartH;
-    ctx.strokeStyle = "#2FE07C";
-    ctx.lineWidth = 1;
-    ctx.setLineDash([5, 5]);
-    ctx.beginPath();
-    ctx.moveTo(padL, targetY);
-    ctx.lineTo(W - padR, targetY);
-    ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.fillStyle = "#2FE07C";
-    ctx.font = "600 11px 'Archivo', sans-serif";
-    ctx.textAlign = "left";
-    ctx.fillText("Batas atas sasaran BI 3,5%", padL + 2, targetY - 7);
-    inflationData.forEach(function (d, i) {
-      var barH = (d.value / max) * chartH;
-      var x = padL + slot * i + (slot - barW) / 2;
-      var y = padT + chartH - barH;
-      ctx.fillStyle = i === 3 ? "#2FE07C" : "#1F7A4D";
-      ctx.fillRect(x, y, barW, barH);
-      ctx.fillStyle = "#EAF5EE";
-      ctx.font = "700 13px 'Archivo', sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText(d.value.toFixed(2).replace(".", ",") + "%", x + barW / 2, y - 8);
-      ctx.fillStyle = "#93A89B";
-      ctx.font = "500 12px 'Archivo', sans-serif";
-      ctx.fillText(d.label, x + barW / 2, padT + chartH + 22);
-    });
-    ctx.fillStyle = "#EAF5EE";
-    ctx.fillRect(padL, padT + chartH, chartW, 2);
-  }
-  drawChart();
-  var resizeTimer = null;
-  window.addEventListener("resize", function () {
-    window.clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(drawChart, 150);
-  });
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(drawChart);
-  }
 
   /* Dialog sertifikat */
   var CERTS = {
