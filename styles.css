@@ -358,10 +358,8 @@ section[id]{scroll-margin-top:84px}
 .cred-detail h3{font-family:"Archivo",sans-serif;font-weight:800;font-size:22px;line-height:1.3}
 .cred-detail-issuer{color:var(--accent-bright);font-weight:700;margin:5px 0 10px;font-size:15px}
 .cred-detail-body{color:var(--muted);font-size:16px;line-height:1.65;max-width:72ch}
-.cred-detail-hint{color:var(--muted);font-size:16px}
 .cred-detail-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px;align-items:center}
 .cred-detail-note{font-size:14.5px;color:var(--muted)}
-.certs-note{margin-top:20px;font-size:14.5px;color:var(--muted)}
 
 /* Kontak */
 .contact{padding-bottom:84px}
