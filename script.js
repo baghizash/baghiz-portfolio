@@ -1,5 +1,5 @@
 // Portofolio Baghiz. Semua interaksi di halaman ini benar benar bekerja:
-// menu ponsel, tilt ID badge, slider proyek unggulan, kartu kredensial
+// menu ponsel, tilt ID badge, kartu proyek, kartu kredensial
 // berputar, dan tombol salin email.
 
 (function () {
@@ -240,7 +240,7 @@
   }
 })();
 
-/* ===== Cabang gaya-dark-idcard: tilt ID badge + slider proyek ===== */
+/* ===== Cabang gaya-dark-idcard: tilt ID badge + kartu proyek ===== */
 const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // ID badge miring mengikuti mouse, seperti kartu gantung pada referensi video
@@ -269,52 +269,124 @@ if (badgeTiltEl && heroSection && !prefersReduced && window.matchMedia("(pointer
   heroSection.addEventListener("mouseleave", () => { targetY = 0; targetX = 0; kickBadgeTilt(); });
 }
 
-// Slider proyek unggulan (geser manual dengan tombol, titik, dan scroll snap)
-const sliderTrack = document.getElementById("sliderTrack");
-if (sliderTrack) {
-  const slideEls = Array.from(sliderTrack.children);
-  const dotsWrap = document.getElementById("sliderDots");
-  const statusEl = document.getElementById("sliderStatus");
-  const slideTitles = slideEls.map((el) => (el.getAttribute("aria-label") || "").split(": ")[1] || "");
-  let currentSlide = 0;
-  let scrollDebounce = null;
+// Kartu proyek: berputar terus sampai satu kartu diklik, pola sama
+// dengan kartu kredensial. Detail tampil di panel bawah.
+const PROJECTS = {
+  "cabai": { title: "Harga Cabai Indonesia 2026", cat: "Harga Pangan • PIHPS Nasional", finding: "Harga cabai rawit merah naik 14,3% sepanjang 2026, dengan rata rata Rp75.219 per kg dan puncak Rp105.450 per kg. Kenaikan ini tren yang terbaca dari harga harian di seluruh Indonesia, bukan kejadian satu minggu.", tools: ["Python", "pandas", "Power BI"], url: "https://github.com/baghizash/harga-cabai-indonesia-2026" },
+  "telco": { title: "Telco Customer Churn", cat: "Customer Retention • Data Bisnis", finding: "Churn 26,6% terkonsentrasi pada pelanggan kontrak bulanan dan mengancam 30,5% pendapatan bulanan. Pendapatan yang berisiko hilang mencapai USD 139.130,85 per bulan dari 7.032 pelanggan.", tools: ["Python", "pandas", "Power BI"], url: "https://github.com/baghizash/telco-customer-churn-analysis" },
+  "olist": { title: "Olist E-Commerce Brazil", cat: "E-Commerce • Olist Brazil", finding: "Pendapatan produk mencapai 13,22 juta BRL dari 99.441 pesanan, tetapi hanya 3,1% pelanggan yang membeli lebih dari sekali. Masalahnya ada di pembelian ulang, bukan di penjualan pertama.", tools: ["SQL", "Python", "Power BI"], url: "https://github.com/baghizash/olist-brazilian-ecommerce-analysis" },
+  "inflasi": { title: "Inflasi Indonesia 2019 sampai 2026", cat: "Macroeconomics • Data BPS", finding: "Inflasi year on year turun dari puncak 5,95% pada September 2022 menjadi 3,28% pada September 2026. Seri BPS tujuh tahun disusun ulang dan 150 kota dibandingkan.", tools: ["Python", "SQL", "Power BI"], url: "https://github.com/baghizash/inflasi-indonesia-2026" },
+  "pengangguran": { title: "Pengangguran Indonesia 2026", cat: "Ketenagakerjaan • Sakernas BPS", finding: "Tingkat pengangguran terbuka 4,65% pada Mei 2026, tetapi usia 15 sampai 24 tahun mencapai 17,37% dan lulusan SMK 7,68%, tertinggi per jenjang pendidikan.", tools: ["Python", "pandas", "Power BI"], url: "https://github.com/baghizash/pengangguran-indonesia-2026" },
+  "hr": { title: "HR Attrition dan People Analytics", cat: "People Analytics • Data IBM HR", finding: "Attrition mencapai 16,1% dari 1.470 karyawan. Karyawan yang lembur resign tiga kali lebih sering, dan Sales Representative adalah peran paling rawan ditinggalkan.", tools: ["Python", "pandas", "Power BI"], url: "https://github.com/baghizash/ibm-hr-attrition-people-analytics" },
+  "ipm": { title: "Indeks Pembangunan Manusia 2025", cat: "Pembangunan Manusia • Data BPS", finding: "IPM nasional 75,90 pada 2025. DKI Jakarta tertinggi dengan 85,05 dan Papua Pegunungan terendah dengan 54,91, jadi kesenjangan pembangunan antar provinsi masih lebar.", tools: ["Python", "pandas", "Power BI"], url: "https://github.com/baghizash/ipm-indonesia-2026" },
+  "kemiskinan": { title: "Kemiskinan dan Ketimpangan Indonesia", cat: "Kemiskinan • Data BPS", finding: "Kemiskinan turun ke 8,07% pada Maret 2026, terendah dalam seri 2019 sampai 2026, dan ketimpangan ikut menyempit.", tools: ["Python", "pandas", "Power BI"], url: "https://github.com/baghizash/kemiskinan-indonesia-2026" },
+  "pariwisata": { title: "Pariwisata Indonesia", cat: "Pariwisata • Data BPS", finding: "Kunjungan wisatawan mancanegara sepanjang 2025 mencapai 15.386.646, pulih ke 95,5% dari level 2019, dengan Bali sebagai pintu masuk utama.", tools: ["Python", "pandas", "Power BI"], url: "https://github.com/baghizash/pariwisata-indonesia-2026" },
+  "pangan": { title: "Harga Pangan Nasional", cat: "Harga Pangan • PIHPS Nasional", finding: "Rata rata harga minyak goreng mencapai Rp22.158 per kg pada 2026, naik 6,8% dibanding 2025, salah satu kenaikan tertinggi di antara kelompok pangan yang dipantau.", tools: ["Python", "pandas", "Power BI"], url: "https://github.com/baghizash/harga-pangan-nasional-2026" },
+  "gempa": { title: "Gempa Bumi Indonesia 2015 sampai 2026", cat: "Kebencanaan • Data USGS", finding: "Tercatat 9.600 kejadian gempa magnitudo 4,5 ke atas pada 2015 sampai 2026, dengan kejadian terbesar M7,8 di Ende.", tools: ["Python", "pandas", "Power BI"], url: "https://github.com/baghizash/gempa-bumi-indonesia-2026" },
+  "ispa": { title: "ISPA Indonesia 2026", cat: "Kesehatan • Data Kemenkes", finding: "Laporan ISPA nasional mencapai 14.088.945 kasus sampai minggu ke 38 tahun 2026, disusun dari data SKDR Kemenkes.", tools: ["Python", "pandas", "Power BI"], url: "https://github.com/baghizash/ispa-indonesia-2026-analysis" }
+};
 
-  slideEls.forEach((unused, i) => {
-    const dot = document.createElement("button");
-    dot.type = "button";
-    dot.className = "slider-dot" + (i === 0 ? " is-active" : "");
-    dot.setAttribute("aria-label", "Tampilkan proyek " + (i + 1) + ": " + slideTitles[i]);
-    dot.addEventListener("click", () => goToSlide(i));
-    dotsWrap.appendChild(dot);
-  });
-  const dotEls = Array.from(dotsWrap.children);
+const projStage = document.getElementById("projStage");
+const projViewport = document.getElementById("projViewport");
+const projTrack = document.getElementById("projTrack");
+const projSet = document.getElementById("projSet");
+const projDetail = document.getElementById("projDetail");
+let focusedProjCard = null;
 
-  function setActiveSlide() {
-    dotEls.forEach((d, i) => d.classList.toggle("is-active", i === currentSlide));
-    statusEl.textContent = "Proyek " + (currentSlide + 1) + " dari " + slideEls.length + ": " + slideTitles[currentSlide];
-  }
-  function goToSlide(i) {
-    currentSlide = Math.max(0, Math.min(slideEls.length - 1, i));
-    sliderTrack.scrollTo({
-      left: slideEls[currentSlide].offsetLeft - sliderTrack.offsetLeft,
-      behavior: prefersReduced ? "auto" : "smooth"
-    });
-    setActiveSlide();
-  }
-  document.getElementById("sliderPrev").addEventListener("click", () => {
-    goToSlide((currentSlide - 1 + slideEls.length) % slideEls.length);
+function resumeProjLoop() {
+  focusedProjCard = null;
+  projStage.classList.remove("is-focused");
+  projTrack.style.transform = "";
+  projSet.querySelectorAll(".proj-card").forEach(function (card) {
+    card.classList.remove("is-focused");
+    card.classList.remove("is-dim");
   });
-  document.getElementById("sliderNext").addEventListener("click", () => {
-    goToSlide((currentSlide + 1) % slideEls.length);
+  projDetail.innerHTML = "";
+  projDetail.hidden = true;
+}
+
+function centerProjCard(card) {
+  const x = projViewport.clientWidth / 2 - (card.offsetLeft + card.offsetWidth / 2);
+  projTrack.style.transform = "translateX(" + x + "px)";
+}
+
+function focusProjCard(card) {
+  const proj = PROJECTS[card.getAttribute("data-proj")];
+  if (!proj) return;
+  focusedProjCard = card;
+  projStage.classList.add("is-focused");
+  projSet.querySelectorAll(".proj-card").forEach(function (other) {
+    other.classList.toggle("is-focused", other === card);
+    other.classList.toggle("is-dim", other !== card);
   });
-  sliderTrack.addEventListener("scroll", () => {
-    window.clearTimeout(scrollDebounce);
-    scrollDebounce = window.setTimeout(() => {
-      const idx = Math.round(sliderTrack.scrollLeft / sliderTrack.clientWidth);
-      if (idx !== currentSlide && idx >= 0 && idx < slideEls.length) {
-        currentSlide = idx;
-        setActiveSlide();
+  centerProjCard(card);
+
+  projDetail.innerHTML = "";
+  projDetail.hidden = false;
+  const title = document.createElement("h3");
+  title.textContent = proj.title;
+  const cat = document.createElement("p");
+  cat.className = "proj-detail-cat";
+  cat.textContent = proj.cat;
+  const body = document.createElement("p");
+  body.className = "proj-detail-body";
+  body.textContent = proj.finding;
+  const tags = document.createElement("ul");
+  tags.className = "proj-tags";
+  proj.tools.forEach(function (tool) {
+    const li = document.createElement("li");
+    li.textContent = tool;
+    tags.appendChild(li);
+  });
+  const actions = document.createElement("div");
+  actions.className = "proj-detail-actions";
+  const link = document.createElement("a");
+  link.className = "btn btn-primary";
+  link.href = proj.url;
+  link.target = "_blank";
+  link.rel = "noopener";
+  link.textContent = "Buka di GitHub";
+  const resumeBtn = document.createElement("button");
+  resumeBtn.type = "button";
+  resumeBtn.className = "btn btn-dark";
+  resumeBtn.textContent = "Putar lagi";
+  resumeBtn.addEventListener("click", resumeProjLoop);
+  actions.appendChild(link);
+  actions.appendChild(resumeBtn);
+  projDetail.appendChild(title);
+  projDetail.appendChild(cat);
+  projDetail.appendChild(body);
+  projDetail.appendChild(tags);
+  projDetail.appendChild(actions);
+}
+
+if (projStage && projViewport && projTrack && projSet && projDetail) {
+  const projClone = projSet.cloneNode(true);
+  projClone.removeAttribute("id");
+  projClone.setAttribute("aria-hidden", "true");
+  projClone.querySelectorAll("button").forEach(function (btn) { btn.tabIndex = -1; });
+  projTrack.appendChild(projClone);
+  projViewport.classList.add("is-loop");
+
+  projTrack.addEventListener("click", function (event) {
+    const btn = event.target.closest(".proj-card");
+    if (!btn) return;
+    const key = btn.getAttribute("data-proj");
+    const originals = projSet.querySelectorAll(".proj-card");
+    for (let i = 0; i < originals.length; i += 1) {
+      if (originals[i].getAttribute("data-proj") === key) {
+        focusProjCard(originals[i]);
+        break;
       }
-    }, 120);
+    }
+  });
+
+  let projResizeTimer = null;
+  window.addEventListener("resize", function () {
+    if (!focusedProjCard) return;
+    window.clearTimeout(projResizeTimer);
+    projResizeTimer = window.setTimeout(function () {
+      centerProjCard(focusedProjCard);
+    }, 150);
   });
 }
