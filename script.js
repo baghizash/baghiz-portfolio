@@ -438,8 +438,11 @@ if (projStage && projViewport && projTrack && projSet && projDetail) {
       card.style.height = "auto";
       max = Math.max(max, card.offsetHeight);
     });
-    cards.forEach(function (card) { card.style.height = max + "px"; });
-    stage.style.height = (max + 150) + "px";
+    /* Sesuai permintaan Baghiz: tinggi kartu dipotong jadi setengah
+       dari tinggi alami terpanjang, dengan lantai aman 320px. */
+    const target = Math.max(320, Math.round(max / 2));
+    cards.forEach(function (card) { card.style.height = target + "px"; });
+    stage.style.height = (target + 150) + "px";
   }
 
   let expResizeTimer = null;
