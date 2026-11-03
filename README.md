@@ -55,3 +55,12 @@ Semua angka temuan berasal dari proyek portofolio yang sudah terverifikasi dan b
 ## Kontak
 
 Baghiz Asshiddiqie Arasya, baghiz.ash@gmail.com, GitHub: https://github.com/baghizash
+
+## Cara edit lokal di VS Code
+
+1. Clone repo ini: `git clone https://github.com/baghizash/baghiz-portfolio.git` (kalau sudah punya foldernya, cukup `git pull` di dalamnya).
+2. Buka foldernya di VS Code. Pengaturan di folder `.vscode` membuat commit otomatis ter-push ke GitHub.
+3. Alur editnya: ubah file, simpan (Ctrl+S), buka panel Source Control (ikon cabang di kiri), tulis pesan commit, tekan Ctrl+Enter. Commit langsung ter-push dan situs live terupdate sekitar 1 sampai 2 menit kemudian.
+4. Untuk melihat hasil saat mengedit, pasang ekstensi Live Server (VS Code akan menyarankannya), lalu klik kanan `index.html` dan pilih Open with Live Server.
+5. Aturan main: selalu `git pull` dulu sebelum mulai mengedit, dan setelah selesai push, kabari Aulia supaya salinan kerjanya ikut disinkronkan sebelum ia mengedit file yang sama.
+6. Kalau mengubah `styles.css` atau `script.js`, naikkan juga nomor versi pada dua baris pemanggilnya di `index.html` (misalnya `?v=20261103-14` menjadi nomor berikutnya) supaya browser pengunjung langsung mengambil file baru, bukan cache lama.
