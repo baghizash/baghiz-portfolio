@@ -484,3 +484,7 @@ section[id]{scroll-margin-top:84px}
   .exp-role{font-size:18px}
   .exp-desc{font-size:13px}
 }
+
+/* Tombol sosial di hero, di samping tombol proyek */
+.social-btn{gap:9px}
+.social-btn svg{width:17px;height:17px;flex:0 0 auto}
