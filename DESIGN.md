@@ -26,7 +26,7 @@ Dials: ENERGY 4, RHYTHM 3, MOTION 4. Motion naik dibanding cabang lain karena re
 
 ## Yang tetap
 
-Seluruh fungsi dari main dipertahankan: arsip 12 proyek dengan filter dan pencarian, chart inflasi (warna disesuaikan: batang hijau tua, puncak 2022 hijau terang, garis target putus putus hijau), dialog ringkasan 8 sertifikat, tombol salin email, menu ponsel, dan placeholder gambar sertifikat. Placeholder foto sekarang berbentuk area foto di dalam ID badge; petunjuk penggantiannya tetap di assets/README.md (file assets/foto-baghiz.jpg, rasio mendekati 4 banding 4,4).
+Seluruh fungsi dari main dipertahankan: dialog ringkasan 8 sertifikat, tombol salin email, menu ponsel, dan placeholder gambar sertifikat. Catatan 3 November 2026: section arsip "Dua Belas Proyek" (daftar 12 proyek dengan filter dan pencarian, beserta chart inflasi di dalamnya) DIHAPUS SEMENTARA atas perintah Baghiz, untuk diganti dengan bagian baru nanti; kode filter, chart, dan gayanya ikut dibersihkan dari script.js dan styles.css. Placeholder foto sekarang berbentuk area foto di dalam ID badge; petunjuk penggantiannya tetap di assets/README.md (file assets/foto-baghiz.jpg, rasio mendekati 4 banding 4,4).
 
 ## Menjalankan
 
