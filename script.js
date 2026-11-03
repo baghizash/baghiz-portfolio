@@ -429,11 +429,26 @@ if (projStage && projViewport && projTrack && projSet && projDetail) {
     if (event.key === "ArrowLeft") { event.preventDefault(); go(-1); }
   });
 
+  /* Samakan tinggi semua kartu mengikuti kartu terpanjang,
+     dan sesuaikan tinggi panggung dengannya. */
+  const cards = slides.map(function (slide) { return slide.querySelector(".exp-card"); });
+  function equalize() {
+    let max = 0;
+    cards.forEach(function (card) {
+      card.style.height = "auto";
+      max = Math.max(max, card.offsetHeight);
+    });
+    cards.forEach(function (card) { card.style.height = max + "px"; });
+    stage.style.height = (max + 150) + "px";
+  }
+
   let expResizeTimer = null;
   window.addEventListener("resize", function () {
     window.clearTimeout(expResizeTimer);
-    expResizeTimer = window.setTimeout(render, 150);
+    expResizeTimer = window.setTimeout(function () { equalize(); render(); }, 150);
   });
 
+  equalize();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { equalize(); render(); });
   render();
 })();
