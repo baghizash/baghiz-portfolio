@@ -307,52 +307,6 @@ section[id]{scroll-margin-top:84px}
 .slider-arrow:hover{border-color:var(--accent);color:var(--accent)}
 .slider-status{margin-top:14px;font-size:14px;color:var(--muted)}
 
-/* Arsip */
-.archive-controls{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;justify-content:space-between;margin-bottom:18px}
-.filter-group{display:flex;flex-wrap:wrap;gap:9px}
-.filter-btn{
-  cursor:pointer;min-height:44px;padding:10px 17px;border-radius:999px;
-  background:var(--panel);color:var(--text);border:1px solid var(--line-bright);
-  font-weight:700;font-size:14.5px;
-}
-.filter-btn:hover{border-color:var(--accent)}
-.filter-btn.is-active{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.search-box{display:flex;flex-direction:column;gap:6px;min-width:min(320px,100%)}
-.search-box label{font-weight:700;font-size:14.5px}
-.search-box input{
-  min-height:48px;padding:11px 16px;border:1px solid var(--line-bright);border-radius:999px;
-  background:var(--panel);color:var(--text);width:100%;
-}
-.search-box input::placeholder{color:var(--muted)}
-.archive-status{font-size:14.5px;color:var(--muted);margin-bottom:14px}
-.archive-list{list-style:none;margin:0;padding:0}
-.archive-row{
-  background:var(--panel);border:1px solid var(--line);border-radius:16px;margin-bottom:10px;
-}
-.archive-row a{
-  display:grid;grid-template-columns:minmax(0,4fr) minmax(0,5fr) minmax(0,2fr) 28px;
-  gap:20px;align-items:center;padding:20px 22px;
-  text-decoration:none;color:var(--text);border-radius:16px;min-height:44px;
-  transition:border-color .15s ease,background-color .15s ease;
-}
-.archive-row a:hover{background:var(--panel-2);border-color:var(--accent)}
-.row-title{font-weight:800;font-size:17px;line-height:1.3}
-.row-finding{font-size:15px;color:var(--muted);line-height:1.5}
-.row-meta{font-size:13.5px;color:var(--muted);font-weight:600}
-.row-arrow{color:var(--accent);font-size:17px}
-.archive-empty{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:32px}
-.archive-empty p{margin-bottom:16px;font-weight:600}
-
-/* Chart */
-.chart-block{
-  margin:56px 0 0;background:var(--panel);border:1px solid var(--line);
-  border-radius:var(--radius-card);padding:36px;
-}
-.chart-head{display:flex;flex-wrap:wrap;gap:12px 40px;align-items:baseline;margin-bottom:24px}
-.chart-title{font-family:"Archivo",sans-serif;font-weight:800;font-size:21px}
-.chart-note{font-size:14.5px;color:var(--muted);max-width:62ch}
-.chart-block canvas{width:100%;height:auto;display:block}
-
 /* Keahlian */
 .skills-grid{display:grid;grid-template-columns:1.2fr 1.2fr .9fr;gap:14px}
 .skill-group{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-card);padding:34px 30px}
@@ -427,8 +381,6 @@ section[id]{scroll-margin-top:84px}
   .slide{grid-template-columns:1fr 1fr;gap:28px}
   .skills-grid{grid-template-columns:1fr 1fr}
   .skill-group-small{grid-column:1 / -1}
-  .archive-row a{grid-template-columns:minmax(0,4fr) minmax(0,5fr) 28px}
-  .row-meta{display:none}
   .cert-row{grid-template-columns:140px minmax(0,1fr) auto}
   .about-grid{gap:36px}
 }
@@ -460,12 +412,6 @@ section[id]{scroll-margin-top:84px}
   .works-head{flex-direction:column;align-items:flex-start;gap:8px}
   .slide{grid-template-columns:1fr;gap:24px}
   .slide-visual{min-height:280px}
-  .archive-controls{flex-direction:column;align-items:stretch}
-  .search-box{min-width:0}
-  .archive-row a{grid-template-columns:1fr 28px;gap:6px 14px;padding:18px}
-  .row-finding{grid-column:1}
-  .row-arrow{grid-row:1;grid-column:2}
-  .chart-block{padding:24px 18px}
   .skills-grid{grid-template-columns:1fr}
   .cert-row{grid-template-columns:1fr;gap:16px;padding:22px 18px}
   .cert-thumb{aspect-ratio:16/7}
