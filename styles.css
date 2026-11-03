@@ -329,17 +329,9 @@ section[id]{scroll-margin-top:84px}
 .cred-detail-note{font-size:14.5px;color:var(--muted)}
 
 /* Kontak */
-.contact{padding-bottom:84px}
-.contact-title{font-size:clamp(36px,5vw,60px);text-transform:uppercase;max-width:20ch;line-height:1.08}
-.contact-body{margin-top:22px;font-size:17.5px;line-height:1.65;color:var(--muted);max-width:58ch}
-.contact-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
 .copy-status{margin-top:18px;font-size:15px;font-weight:700;color:var(--accent);min-height:24px}
 
 /* Footer */
-.site-footer{border-top:1px solid var(--line);padding:52px 0 48px}
-.footer-name{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(30px,4.6vw,46px);text-transform:uppercase;margin-bottom:12px}
-.footer-meta{font-size:14.5px;color:var(--muted);margin-bottom:8px}
-.footer-meta a{color:var(--accent);font-weight:700}
 
 /* Reveal */
 @media (prefers-reduced-motion: no-preference){
@@ -400,7 +392,6 @@ section[id]{scroll-margin-top:84px}
   .about-grid{grid-template-columns:1fr}
   .about-stats{gap:32px}
   .skills-grid{grid-template-columns:1fr}
-  .contact-actions .btn{width:100%}
 }
 
 /* Lebar menengah: rapatkan header agar tetap satu baris */
