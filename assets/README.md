@@ -25,9 +25,11 @@ Foto tampil di dalam ID badge gantung pada hero.
 
 Tips foto: latar polos, cahaya dari depan, bahu ke atas terlihat, resolusi cukup tajam saat diperbesar. Hindari filter berlebihan.
 
-## 2. Gambar sertifikat
+## 2. Gambar sertifikat (cover kartu kredensial)
 
-1. Ekspor atau screenshot halaman pertama PDF sertifikat sebagai JPG atau PNG, rasio sekitar 4 banding 3.
+Di section Sertifikat, setiap kredensial tampil sebagai kartu cover yang berputar, dan nama kredensialnya tercetak langsung di cover. Untuk mengganti cover dengan gambar sertifikat asli:
+
+1. Ekspor atau screenshot halaman pertama PDF sertifikat sebagai JPG atau PNG, rasio potret sekitar 2 banding 3.
 2. Simpan di folder `assets/certs/` dengan nama berikut:
 
 | Sertifikat | Nama file |
@@ -41,23 +43,18 @@ Tips foto: latar polos, cahaya dari depan, bahu ke atas terlihat, resolusi cukup
 | More Applied Data Science with Python | `michigan-data-science.jpg` |
 | Learn English Now, Arizona State University | `learn-english-now-asu.jpg` |
 
-3. Untuk menampilkan satu gambar, buka `index.html`, cari baris sertifikat yang sesuai, dan ganti elemen ini:
+3. Buka `index.html`, cari tombol kartu dengan `data-cert` yang sesuai, dan ganti seluruh elemen `<span class="cred-cover ...">...</span>` di dalamnya dengan:
 
 ```html
-<div class="cert-thumb" role="img" aria-label="Tempat pratinjau sertifikat ...">Pratinjau sertifikat</div>
-```
-
-dengan:
-
-```html
-<img class="cert-thumb-img" src="assets/certs/NAMA-FILE.jpg" alt="Sertifikat NAMA SERTIFIKAT atas nama Baghiz Asshiddiqie Arasya" width="400" height="300" loading="lazy">
+<img class="cred-cover-img" src="assets/certs/NAMA-FILE.jpg" alt="Sertifikat NAMA SERTIFIKAT atas nama Baghiz Asshiddiqie Arasya" width="420" height="600">
 ```
 
 4. Tambahkan aturan CSS ini di akhir `styles.css` sekali saja:
 
 ```css
-.cert-thumb-img{width:100%;height:100%;object-fit:cover;display:block}
-.cert-row .cert-thumb-img{aspect-ratio:4/3}
+.cred-cover-img{width:208px;height:296px;object-fit:cover;border-radius:6px 14px 14px 6px;display:block;transform:rotateY(-15deg);box-shadow:18px 24px 40px rgba(0,0,0,.45)}
+.cred-card.is-focused .cred-cover-img{transform:rotateY(0) scale(1.12)}
+@media (max-width:720px){.cred-cover-img{width:176px;height:252px}}
 ```
 
-Gambar sertifikat yang sama juga bisa dipasang di jendela ringkasan (dialog) dengan mengganti elemen `#certDialogThumb` mengikuti pola yang sama, tetapi langkah itu opsional.
+Nama kredensial tetap terbaca dari gambar sertifikat itu sendiri, dan detail singkatnya tetap muncul di panel bawah saat kartu diklik.
