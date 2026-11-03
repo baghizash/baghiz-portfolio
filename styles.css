@@ -79,7 +79,7 @@ button,a{-webkit-tap-highlight-color:transparent}
 }
 .section-head{max-width:720px;margin-bottom:52px}
 .section-head p:not(.section-label){margin-top:18px;font-size:17.5px;color:var(--muted)}
-.section{padding:110px 0}
+.section{padding:72px 0}
 section[id]{scroll-margin-top:84px}
 
 /* Header */
@@ -129,7 +129,7 @@ section[id]{scroll-margin-top:84px}
 }
 
 /* Hero */
-.hero{position:relative;padding:84px 0 96px;overflow:hidden}
+.hero{position:relative;padding:84px 0 72px;overflow:hidden}
 .hero-glow{
   position:absolute;border-radius:50%;pointer-events:none;
   background:radial-gradient(circle, rgba(236,72,153,.13) 0%, rgba(236,72,153,0) 65%);
@@ -335,7 +335,7 @@ section[id]{scroll-margin-top:84px}
 .certs-note{margin-top:20px;font-size:14.5px;color:var(--muted)}
 
 /* Kontak */
-.contact{padding-bottom:110px}
+.contact{padding-bottom:84px}
 .contact-title{font-size:clamp(36px,5vw,60px);text-transform:uppercase;max-width:20ch;line-height:1.08}
 .contact-body{margin-top:22px;font-size:17.5px;line-height:1.65;color:var(--muted);max-width:58ch}
 .contact-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
@@ -395,7 +395,7 @@ section[id]{scroll-margin-top:84px}
   .site-nav.is-open{display:flex}
   .site-nav a{padding:13px 4px;font-size:15px}
   .nav-dot{display:none}
-  .section{padding:70px 0}
+  .section{padding:54px 0}
   .hero{padding:52px 0 72px}
   .hero-grid{grid-template-columns:1fr;gap:52px}
   .hero h1{font-size:clamp(46px,14vw,68px)}
