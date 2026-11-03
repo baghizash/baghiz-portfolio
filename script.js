@@ -359,3 +359,81 @@ if (projStage && projViewport && projTrack && projSet && projDetail) {
     }, 150);
   });
 }
+
+/* ===== Pengalaman: wheel slider ala referensi swiper-wheel-slide =====
+   Kartu aktif tegak di tengah; kartu lain miring menuruni busur roda.
+   Kendali: scroll di area panggung, seret, klik kartu samping, panah. */
+(function () {
+  const stage = document.getElementById("expStage");
+  if (!stage) return;
+  const slides = Array.from(stage.querySelectorAll("[data-exp-slide]"));
+  const status = document.getElementById("expStatus");
+  const total = slides.length;
+  let active = 0;
+  let wheelLock = false;
+
+  function factor() { return window.innerWidth <= 720 ? 0.74 : 1; }
+
+  function render() {
+    const f = factor();
+    slides.forEach(function (slide, i) {
+      let off = i - active;
+      if (off > total / 2) off -= total;
+      if (off < -total / 2) off += total;
+      const a = Math.abs(off);
+      const x = off * 330 * f;
+      const y = (a === 1 ? 92 : a >= 2 ? 350 : 0) * (window.innerWidth <= 720 ? 0.8 : 1);
+      const rot = Math.max(-2, Math.min(2, off)) * 10;
+      slide.style.transform = "translateX(" + x + "px) translateY(" + y + "px) rotate(" + rot + "deg)";
+      slide.style.opacity = a > 2 ? "0" : "1";
+      slide.style.zIndex = String(20 - a);
+      slide.style.pointerEvents = a > 2 ? "none" : "auto";
+      slide.classList.toggle("is-active", off === 0);
+      slide.setAttribute("aria-hidden", off === 0 ? "false" : "true");
+    });
+    if (status) status.textContent = (active + 1) + " / " + total;
+  }
+  function go(dir) { active = (active + dir + total) % total; render(); }
+  function goTo(i) { active = ((i % total) + total) % total; render(); }
+
+  const prevBtn = document.getElementById("expPrev");
+  const nextBtn = document.getElementById("expNext");
+  if (prevBtn) prevBtn.addEventListener("click", function () { go(-1); });
+  if (nextBtn) nextBtn.addEventListener("click", function () { go(1); });
+
+  slides.forEach(function (slide, i) {
+    slide.addEventListener("click", function () { if (i !== active) goTo(i); });
+  });
+
+  stage.addEventListener("wheel", function (event) {
+    event.preventDefault();
+    if (wheelLock) return;
+    if (Math.abs(event.deltaY) < 12) return;
+    wheelLock = true;
+    go(event.deltaY > 0 ? 1 : -1);
+    window.setTimeout(function () { wheelLock = false; }, 480);
+  }, { passive: false });
+
+  let dragX = null;
+  stage.addEventListener("pointerdown", function (event) { dragX = event.clientX; });
+  stage.addEventListener("pointerup", function (event) {
+    if (dragX === null) return;
+    const dx = event.clientX - dragX;
+    if (Math.abs(dx) > 48) go(dx < 0 ? 1 : -1);
+    dragX = null;
+  });
+  stage.addEventListener("pointercancel", function () { dragX = null; });
+
+  stage.addEventListener("keydown", function (event) {
+    if (event.key === "ArrowRight") { event.preventDefault(); go(1); }
+    if (event.key === "ArrowLeft") { event.preventDefault(); go(-1); }
+  });
+
+  let expResizeTimer = null;
+  window.addEventListener("resize", function () {
+    window.clearTimeout(expResizeTimer);
+    expResizeTimer = window.setTimeout(render, 150);
+  });
+
+  render();
+})();
