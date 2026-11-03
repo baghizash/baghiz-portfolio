@@ -89,10 +89,7 @@
 
   function resetCredDetail() {
     credDetail.innerHTML = "";
-    var hint = document.createElement("p");
-    hint.className = "cred-detail-hint";
-    hint.textContent = "Kartu berputar otomatis. Klik salah satu kartu untuk fokus ke kredensial itu dan membaca detail singkatnya di sini.";
-    credDetail.appendChild(hint);
+    credDetail.hidden = true;
   }
 
   function resumeCredLoop() {
@@ -123,6 +120,7 @@
     centerCredCard(card);
 
     credDetail.innerHTML = "";
+    credDetail.hidden = false;
     var title = document.createElement("h3");
     title.textContent = cert.title;
     var issuer = document.createElement("p");
