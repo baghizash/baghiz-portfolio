@@ -91,10 +91,10 @@ section[id]{scroll-margin-top:84px}
 }
 .header-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:72px}
 .wordmark{
-  font-family:"Archivo",sans-serif;font-weight:900;font-size:24px;
-  letter-spacing:.02em;text-decoration:none;color:var(--text);text-transform:uppercase;
+  display:inline-flex;align-items:center;background:#FFFFFF;
+  border-radius:10px;padding:7px 14px;line-height:0;
 }
-.wordmark-dot{color:var(--accent)}
+.site-logo{height:30px;width:auto;display:block}
 .site-nav{display:flex;align-items:center;gap:30px}
 .site-nav a{
   text-decoration:none;font-size:14.5px;font-weight:700;color:var(--text);
@@ -417,7 +417,8 @@ section[id]{scroll-margin-top:84px}
   body{font-size:16px}
   .wrap{padding:0 16px}
   .header-inner{flex-wrap:wrap;min-height:60px;row-gap:2px;padding:8px 0}
-  .wordmark{font-size:19px}
+  .wordmark{padding:5px 10px;border-radius:8px}
+  .site-logo{height:23px}
   .menu-button{display:none}
   .site-nav{
     display:flex;position:static;flex-direction:row;align-items:center;
@@ -456,7 +457,6 @@ section[id]{scroll-margin-top:84px}
 @media (max-width:900px) and (min-width:721px){
   .site-nav{gap:16px}
   .site-nav a{font-size:13px}
-  .wordmark{font-size:21px}
 }
 
 /* Kredensial di ponsel: kartu lebih kecil agar tetap seperti deretan buku */
