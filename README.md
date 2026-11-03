@@ -33,9 +33,9 @@ npx serve .
 
 | File | Fungsi |
 |---|---|
-| `index.html` | Seluruh konten halaman: hero, tentang, 12 proyek sebagai kartu bergambar dashboard, keahlian, kredensial, kontak |
+| `index.html` | Seluruh konten halaman: hero, tentang, 12 proyek sebagai kartu bergambar dashboard, keahlian, kredensial |
 | `styles.css` | Sistem desain lengkap, termasuk layout tablet dan ponsel |
-| `script.js` | Menu ponsel, tilt ID badge, kartu proyek dan kredensial berputar dengan fokus klik, tombol salin email |
+| `script.js` | Menu ponsel, tilt ID badge, kartu proyek dan kredensial berputar dengan fokus klik |
 | `DESIGN.md` | Arah desain tertulis: gaya dark ID card dari referensi video, palet, tipografi, gerak, dan alasan setiap keputusan |
 | `assets/README.md` | Petunjuk memasukkan foto profil dan gambar sertifikat ke placeholder yang sudah disiapkan |
 
