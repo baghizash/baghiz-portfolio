@@ -135,15 +135,10 @@ section[id]{scroll-margin-top:84px}
 .hero-glow-left{width:720px;height:720px;left:-260px;top:-240px}
 .hero-grid{
   display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);
-  gap:48px;align-items:center;position:relative;
-}
-.hero-role{
-  display:flex;align-items:center;gap:10px;
-  font-weight:700;font-size:15px;color:var(--accent);
-  text-transform:uppercase;letter-spacing:.16em;margin-bottom:24px;
+  gap:48px;align-items:start;position:relative;
 }
 .hero h1{
-  font-size:clamp(64px,8.6vw,124px);
+  font-size:clamp(52px,7vw,102px);
   text-transform:uppercase;line-height:.98;color:var(--text);
 }
 .hero h1 .h-outline{-webkit-text-stroke-width:3px}
@@ -163,8 +158,8 @@ section[id]{scroll-margin-top:84px}
 .hstat dt{font-size:13.5px;color:var(--muted);line-height:1.4;max-width:19ch}
 
 /* ID badge gantung */
-.badge-zone{position:relative;display:flex;justify-content:center;padding-top:6px}
-.badge-sway{transform-origin:50% -30px;will-change:transform}
+.badge-zone{position:relative;display:flex;justify-content:center;padding-top:0}
+.badge-sway{transform-origin:50% 0;will-change:transform;margin-top:-84px}
 @media (prefers-reduced-motion: no-preference){
   .badge-sway{animation:sway 7s ease-in-out infinite alternate}
 }
@@ -172,7 +167,7 @@ section[id]{scroll-margin-top:84px}
 .badge-tilt{will-change:transform;transform-style:preserve-3d}
 .lanyard{display:flex;flex-direction:column;align-items:center;margin-bottom:-14px;position:relative;z-index:2}
 .lanyard-strap{
-  width:26px;height:86px;border-radius:0 0 6px 6px;
+  width:26px;height:128px;border-radius:0 0 6px 6px;
   background:linear-gradient(90deg,#0D3D24 0%,#2FE07C 50%,#0D3D24 100%);
   box-shadow:0 0 22px rgba(47,224,124,.35);
 }
@@ -401,12 +396,14 @@ section[id]{scroll-margin-top:84px}
   .section{padding:70px 0}
   .hero{padding:52px 0 72px}
   .hero-grid{grid-template-columns:1fr;gap:52px}
-  .hero h1{font-size:clamp(56px,17vw,84px)}
+  .hero h1{font-size:clamp(46px,14vw,68px)}
   .hero h1 .h-outline{-webkit-text-stroke-width:2px}
   .hero-stats{grid-template-columns:repeat(3,1fr);gap:12px}
   .hstat dd{font-size:22px}
   .hstat dt{font-size:12px}
   .badge-zone{order:2}
+  .badge-sway{margin-top:-52px}
+  .lanyard-strap{height:104px}
   .about-grid{grid-template-columns:1fr}
   .about-stats{gap:32px}
   .works-head{flex-direction:column;align-items:flex-start;gap:8px}
