@@ -1,72 +1,33 @@
-# DESIGN.md - Website Portofolio Baghiz Asshiddiqie Arasya
+# DESIGN.md - Desain utama: gaya dark ID card
 
 antislop active: during (global preference).
 
+Website ini menerapkan gaya dari video referensi yang dikirim Baghiz pada 3 November 2026 (portofolio "ZEDIAN", UX/UI Designer): panggung gelap, aksen hijau neon, judul display besar dengan satu kata outline, foto dalam ID badge gantung yang bergerak mengikuti mouse, deret angka di hero, panel toolkit, dan slider proyek. Yang dipinjam adalah bahasa visual dan pola interaksinya. Isi, nama, angka, dan proyek tetap milik Baghiz sendiri, tidak ada teks atau angka dari video yang disalin (angka video seperti 05+ tahun dan 99% kepuasan tidak dipakai karena bukan data Baghiz). Pada 3 November 2026 Baghiz memutuskan gaya ini menjadi desain utama di branch `main`; dua gaya lama (arsip editorial dan poster retro) dibuang atas perintahnya.
+
 ## Design Read
 
-Membaca ini sebagai: website portofolio satu halaman untuk rekruter Data Analyst di Indonesia, dengan bahasa visual editorial arsip data, condong ke varian editorial koran data plus satu blok medan warna gelap di penutup.
+Membaca ini sebagai: portofolio Data Analyst yang dipentaskan seperti kartu identitas digital di atas panggung gelap, untuk rekruter yang memindai malam hari di layar terang. Titik beratnya adalah hero: satu kalimat peran, satu kartu identitas, tiga angka asli.
 
-Posisi yang dituju: Data Analyst yang sedang bertumbuh ke Data Science. Bukti utamanya bukan klaim, melainkan 12 proyek analisis dari data resmi Indonesia dan kasus bisnis, masing masing dengan angka temuan yang bisa diverifikasi di GitHub.
+Dials: ENERGY 4, RHYTHM 3, MOTION 4. Motion naik dibanding cabang lain karena referensinya memang hidup oleh gerakan kartu; tetap dibatasi pada badge dan slider.
 
-## Ide dari subject
+## Keputusan dan alasannya
 
-Di website ini, **angka resmi Indonesia menjadi halaman arsip editorial**.
+- Latar hijau hitam `#050807` dan panel `#0B120E`. Alasan: panggung gelap adalah identitas referensi ini; hijau hitam, bukan biru hitam, supaya satu keluarga dengan aksennya.
+- Satu aksen hijau neon `#2FE07C` untuk titik, garis outline, tombol utama, dan status aktif. Kontrasnya 11,56 banding 1 di atas latar, dan teks tombol memakai tinta gelap `#04120A` di atas hijau (11,02 banding 1). Alasan: referensi memakai tepat satu warna sinyal; membaginya ke banyak warna akan merusak efeknya.
+- Judul display Anton, huruf kapital padat. Kata kedua dibuat outline dengan text-stroke hijau dan isi transparan. Alasan: kontras padat lawan outline adalah tanda tangan tipografi referensi; outline hanya dipakai pada kata display besar, tidak pernah pada teks isi, supaya keterbacaan tidak dikorbankan.
+- Foto ditempatkan di ID badge gantung lengkap dengan tali hijau dan klip. Alasan: ini elemen paling khas dari referensi, dan secara fungsi ia adalah tempat foto Baghiz yang memang sudah disiapkan sejak versi pertama. Nama dan peran tercetak di badan kartu seperti kartu identitas asli.
+- Badge miring mengikuti mouse (rotasi maksimal sekitar 11 derajat, dilembutkan dengan interpolasi) dan bergoyang pelan dari titik gantungnya. Alasan: gerakan inilah yang membuat referensinya terasa hidup; goyangan dibatasi kecil dan keduanya mati total pada prefers-reduced-motion, dan tilt hanya aktif pada perangkat berpenunjuk presisi (mouse), bukan sentuh.
+- Tiga angka asli di hero: 12 proyek, 8 sertifikat, 65.437 baris data capstone. Alasan: referensi memakai deret statistik sebagai bukti cepat; di sini angkanya diganti data Baghiz yang terverifikasi, bukan angka pajangan.
+- Proyek unggulan menjadi slider satu proyek per layar dengan panel visual berisi angka terbesar proyek itu, mengikuti pola recent works di referensi. Kontrolnya tombol panah dan titik garis, bisa digeser manual (scroll snap), tanpa putar otomatis. Alasan: autoplay menggerakkan konten tanpa diminta; kontrol manual memberi ritme yang sama tanpa mengambil alih halaman.
+- Kata penting pada pernyataan hero diwarnai hijau (jelas, terukur). Alasan: referensi mewarnai kata kunci kalimatnya; di sini hanya dua kata yang dipilih karena keduanya adalah janji kerja Baghiz.
+- Panel "Peralatan Saya" di bagian tentang berisi pil alat. Alasan: mengikuti panel My Toolkit pada referensi, dan isinya adalah alat yang benar benar dipakai di proyek proyek di halaman ini.
+- Cahaya hijau dipakai hemat: satu lingkaran cahaya redup di hero dan titik cahaya kecil di dekat badge, plus cahaya tali badge. Alasan: referensi memang bercahaya, tetapi cahaya dibatasi pada zona hero supaya halaman tetap terasa seperti panggung, bukan kabut.
+- Radius dikunci: pil penuh untuk tombol dan tag, 20px untuk panel dan kartu, 26px untuk badge. Alasan: referensi konsisten memakai sudut membulat besar; satu tangga radius menjaga kesan itu tetap rapi.
 
-Delapan dari dua belas proyek Baghiz memakai data resmi BPS, PIHPS, Kemenkes, dan USGS tentang Indonesia: harga cabai, inflasi, pengangguran, kemiskinan, IPM, pariwisata, harga pangan, gempa. Karena itu websitenya dirancang seperti publikasi data yang dirawat dengan serius: tipografi koran, daftar proyek seperti buku arsip, satu chart inflasi asli yang digambar dari data BPS, dan angka temuan tampil sebesar headline. Kompetitor generik dengan proyek Titanic atau Iris tidak bisa memakai konsep ini. Konsep ini milik pekerjaan Baghiz sendiri.
+## Yang tetap
 
-Satu hal hidup di halaman: daftar arsip proyek bisa difilter dan dicari, dan chart inflasi tahunan 2019 sampai 2026 digambar langsung dari angka BPS yang terverifikasi. Keduanya memakai konten nyata, bukan dekorasi.
+Seluruh fungsi dari main dipertahankan: arsip 12 proyek dengan filter dan pencarian, chart inflasi (warna disesuaikan: batang hijau tua, puncak 2022 hijau terang, garis target putus putus hijau), dialog ringkasan 8 sertifikat, tombol salin email, menu ponsel, dan placeholder gambar sertifikat. Placeholder foto sekarang berbentuk area foto di dalam ID badge; petunjuk penggantiannya tetap di assets/README.md (file assets/foto-baghiz.jpg, rasio mendekati 4 banding 4,4).
 
-## Dials
+## Menjalankan
 
-design-taste: DESIGN_VARIANCE 8, MOTION_INTENSITY 6, VISUAL_DENSITY 4.
-antislop: ENERGY 3 (berani), RHYTHM 3 (komposisi tiap section berbeda), MOTION 2 (reveal saat scroll dan transisi hover, selalu hormat pada prefers-reduced-motion).
-
-## Palet (dikunci, satu aksen)
-
-- Kertas arsip `#F6F5F0`: ground utama. Alasan: halaman publikasi data, bukan layar aplikasi gelap generik.
-- Tinta `#1A2332`: teks utama. Kontras 14,46 banding 1 di atas kertas, lolos WCAG AA.
-- Merah cabai `#C73E1D`: satu satunya aksen. Alasan: warna ini milik subject, diambil dari proyek harga cabai dan volatilitas pangan, dipakai hanya di momen kunci seperti angka temuan, tautan aktif, dan tombol utama. Kontras 4,65 banding 1 di atas kertas dan 5,08 banding 1 untuk teks putih di atasnya.
-- Biru laut dalam `#1B3A5C`: hanya untuk satu medan warna penuh di section penutup dan footer. Alasan: satu kali pergantian medan warna memberi penutup yang terasa selesai tanpa membuat seluruh situs gelap. Teks putih di atasnya 11,63 banding 1.
-- Step tone `#E9E6DB` dan `#EFEDE6`: pemisah permukaan tanpa garis tipis dan tanpa bayangan.
-
-Tidak ada gradien. Tidak ada ungu AI. Tidak ada kaca. Tidak ada bayangan pada benda diam. Tidak ada glow.
-
-## Tipografi
-
-- Display: Libre Franklin, bobot 800 dan 900, tracking rapat. Alasan: grotesque koran Amerika yang memang lahir untuk headline publikasi dan tabel angka, cocok dengan konsep arsip data, dan bukan default model.
-- Body: IBM Plex Sans, bobot 400, 500, 600. Alasan: sans yang dirancang untuk dokumen teknis dan data, terbaca bersih di ukuran kecil, dan berpasangan wajar dengan Franklin.
-- Angka memakai fitur tabular dari font yang sama (`font-feature-settings: "tnum"`), bukan font monospace dekoratif.
-- Maksimal dua family. Hierarki dibangun dari skala dan bobot: headline hero sangat besar, judul section besar, body 16 sampai 18px, tidak ada ukuran tanggung di antaranya.
-- Minimum teks 12px hanya untuk label kaki yang tidak esensial, teks isi tidak di bawah 14px, target sentuh minimum 44px.
-
-## Bentuk dan layout
-
-- Radius dikunci: 0 untuk blok editorial dan baris arsip, 4px hanya untuk tombol dan input. Satu sistem, dipakai di mana mana.
-- Margin luar sama di semua section. Asimetri terjadi di dalam grid: hero split tidak seimbang, proyek unggulan berganti komposisi, daftar arsip full width, keahlian dalam tiga gugus tidak sama besar, sertifikat dalam daftar baris bukan kartu identik.
-- Tidak ada tiga kartu fitur identik. Tidak ada bento sebagai layout default. Tidak ada eyebrow di setiap section. Tidak ada penomoran dekoratif. Tidak ada garis tipis sebagai dekorasi, pemisah memakai ruang dan step tone.
-- Foto memakai placeholder jujur berlabel, bukan foto stok orang lain dan bukan gambar buatan yang menyamar sebagai foto Baghiz.
-
-## Motion
-
-- Reveal saat scroll memakai IntersectionObserver, naik 18px dan fade, stagger pendek antar item dalam satu section. Alasan: memandu mata mengikuti urutan baca arsip.
-- Hover pada baris proyek menggeser latar ke step tone dan menggerakkan panah tautan 4px. Alasan: memberi tahu baris itu bisa dibuka.
-- Semua motion mati di `prefers-reduced-motion: reduce`.
-
-## Konten dan kejujuran
-
-- Semua angka berasal dari data proyek yang sudah terverifikasi di ~/workspace/portfolio-gabungan/pdf.py dan antrean push GitHub. Tidak ada statistik buatan, tidak ada testimoni, tidak ada logo perusahaan.
-- Sertifikat yang dicantumkan hanya yang benar benar selesai atau yang file PDF nya ada di arsip Baghiz. Dua tautan verifikasi Coursera yang asli dicantumkan: IBM Data Analyst dan Data Science Foundations.
-- Slot foto dan slot pratinjau sertifikat adalah placeholder berlabel jelas sampai Baghiz memasukkan file aslinya.
-- Tanpa em dash dan tanpa en dash di seluruh teks situs. Rentang tahun memakai hyphen biasa.
-
-## Struktur halaman
-
-1. Header polos: wordmark, tautan ke section yang benar benar ada, satu aksi ke GitHub.
-2. Hero split: nama dan posisi besar di kiri, plat foto placeholder di kanan, strip angka temuan nyata di bawahnya.
-3. Tentang: cara kerja Baghiz dari pertanyaan sampai rekomendasi, ditulis sebagai prosa.
-4. Proyek unggulan: enam proyek yang dipin di profil GitHub, komposisi besar bergantian.
-5. Arsip proyek: dua belas proyek dalam daftar yang bisa difilter dan dicari, tiap baris membuka repo GitHub.
-6. Chart inflasi: satu visual data asli di dalam section arsip sebagai bukti cara membaca tren.
-7. Keahlian: tiga gugus keahlian dengan konteks pemakaian nyata di proyek.
-8. Sertifikat: daftar sertifikat dengan dialog detail dan slot pratinjau.
-9. Penutup di medan biru laut dalam: nama besar full width, email, GitHub, tombol salin email yang benar benar bekerja.
+Situs ini live di https://baghizash.github.io/baghiz-portfolio/ dari branch `main`. Untuk menjalankan lokal: `py -m http.server 8000` lalu buka `http://localhost:8000`, dan gerakkan mouse di sekitar kartu identitas untuk merasakan tilt-nya.
