@@ -280,76 +280,86 @@
       <div class="section-head">
         <p class="section-label"><span class="role-dot" aria-hidden="true"></span>Sertifikat</p>
         <h2 class="section-title">Kredensial</h2>
-        <p>Program yang sudah saya selesaikan di Coursera. Pilih satu sertifikat untuk melihat ringkasannya. Tempat pratinjau di setiap baris disiapkan untuk gambar sertifikat aslinya.</p>
+        <p>Program yang sudah saya selesaikan di Coursera, tampil sebagai kartu yang berputar terus seperti etalase buku. Klik satu kartu untuk menghentikan putaran dan memfokuskannya, detail singkatnya muncul di bawah kartu.</p>
       </div>
 
-      <ul class="cert-list">
-        <li class="cert-row reveal">
-          <div class="cert-thumb" role="img" aria-label="Tempat pratinjau sertifikat IBM Data Analyst">Pratinjau sertifikat</div>
-          <div class="cert-main">
-            <h3>IBM Data Analyst Professional Certificate</h3>
-            <p>IBM, 11 course. Excel, Python, SQL, visualisasi data, dan capstone analisis survei 65.437 developer.</p>
+      <div class="cred-stage" id="credStage">
+        <div class="cred-viewport" id="credViewport">
+          <div class="cred-track" id="credTrack">
+            <div class="cred-set" id="credSet">
+              <button type="button" class="cred-card" data-cert="ibm-da" aria-label="Pilih kredensial IBM Data Analyst Professional Certificate">
+                <span class="cred-cover cover-a">
+                  <span class="cred-cover-top">IBM • Coursera</span>
+                  <span class="cred-cover-title">IBM Data Analyst Professional Certificate</span>
+                  <span class="cred-cover-bottom">Sertifikat • 11 course</span>
+                  <span class="cred-cover-note">Gambar sertifikat menyusul</span>
+                </span>
+              </button>
+              <button type="button" class="cred-card" data-cert="google-da" aria-label="Pilih kredensial Google Data Analytics Professional Certificate">
+                <span class="cred-cover cover-b">
+                  <span class="cred-cover-top">Google • Coursera</span>
+                  <span class="cred-cover-title">Google Data Analytics Professional Certificate</span>
+                  <span class="cred-cover-bottom">Sertifikat • 8 course</span>
+                  <span class="cred-cover-note">Gambar sertifikat menyusul</span>
+                </span>
+              </button>
+              <button type="button" class="cred-card" data-cert="meta-da" aria-label="Pilih kredensial Meta Data Analyst Professional Certificate">
+                <span class="cred-cover cover-c">
+                  <span class="cred-cover-top">Meta • Coursera</span>
+                  <span class="cred-cover-title">Meta Data Analyst Professional Certificate</span>
+                  <span class="cred-cover-bottom">Sertifikat • 5 course</span>
+                  <span class="cred-cover-note">Gambar sertifikat menyusul</span>
+                </span>
+              </button>
+              <button type="button" class="cred-card" data-cert="dsf" aria-label="Pilih kredensial Data Science Foundations">
+                <span class="cred-cover cover-d">
+                  <span class="cred-cover-top">University of London • Coursera</span>
+                  <span class="cred-cover-title">Data Science Foundations</span>
+                  <span class="cred-cover-bottom">Specialization • 8 course</span>
+                  <span class="cred-cover-note">Gambar sertifikat menyusul</span>
+                </span>
+              </button>
+              <button type="button" class="cred-card" data-cert="ibm-ba" aria-label="Pilih kredensial IBM Business Analyst Professional Certificate">
+                <span class="cred-cover cover-b">
+                  <span class="cred-cover-top">IBM • Coursera</span>
+                  <span class="cred-cover-title">IBM Business Analyst Professional Certificate</span>
+                  <span class="cred-cover-bottom">Sertifikat</span>
+                  <span class="cred-cover-note">Gambar sertifikat menyusul</span>
+                </span>
+              </button>
+              <button type="button" class="cred-card" data-cert="excel-macq" aria-label="Pilih kredensial Excel Skills for Data Analytics and Visualization">
+                <span class="cred-cover cover-c">
+                  <span class="cred-cover-top">Macquarie University • Coursera</span>
+                  <span class="cred-cover-title">Excel Skills for Data Analytics and Visualization</span>
+                  <span class="cred-cover-bottom">Specialization</span>
+                  <span class="cred-cover-note">Gambar sertifikat menyusul</span>
+                </span>
+              </button>
+              <button type="button" class="cred-card" data-cert="michigan" aria-label="Pilih kredensial More Applied Data Science with Python">
+                <span class="cred-cover cover-d">
+                  <span class="cred-cover-top">University of Michigan • Coursera</span>
+                  <span class="cred-cover-title">More Applied Data Science with Python</span>
+                  <span class="cred-cover-bottom">Specialization</span>
+                  <span class="cred-cover-note">Gambar sertifikat menyusul</span>
+                </span>
+              </button>
+              <button type="button" class="cred-card" data-cert="asu" aria-label="Pilih kredensial Learn English Now">
+                <span class="cred-cover cover-a">
+                  <span class="cred-cover-top">Arizona State University • Coursera</span>
+                  <span class="cred-cover-title">Learn English Now</span>
+                  <span class="cred-cover-bottom">Specialization • 3 course</span>
+                  <span class="cred-cover-note">Gambar sertifikat menyusul</span>
+                </span>
+              </button>
+            </div>
           </div>
-          <button type="button" class="btn btn-dark cert-open" data-cert="ibm-da">Lihat ringkasan</button>
-        </li>
-        <li class="cert-row reveal">
-          <div class="cert-thumb" role="img" aria-label="Tempat pratinjau sertifikat Google Data Analytics">Pratinjau sertifikat</div>
-          <div class="cert-main">
-            <h3>Google Data Analytics Professional Certificate</h3>
-            <p>Google, 8 course. Foundations of data analytics, SQL dan BigQuery, spreadsheet, R, Tableau, dan capstone case study.</p>
-          </div>
-          <button type="button" class="btn btn-dark cert-open" data-cert="google-da">Lihat ringkasan</button>
-        </li>
-        <li class="cert-row reveal">
-          <div class="cert-thumb" role="img" aria-label="Tempat pratinjau sertifikat Meta Data Analyst">Pratinjau sertifikat</div>
-          <div class="cert-main">
-            <h3>Meta Data Analyst Professional Certificate</h3>
-            <p>Meta, 5 course. Spreadsheet dan SQL, Python for analytics, foundations of statistics, dan data management.</p>
-          </div>
-          <button type="button" class="btn btn-dark cert-open" data-cert="meta-da">Lihat ringkasan</button>
-        </li>
-        <li class="cert-row reveal">
-          <div class="cert-thumb" role="img" aria-label="Tempat pratinjau sertifikat Data Science Foundations">Pratinjau sertifikat</div>
-          <div class="cert-main">
-            <h3>Data Science Foundations</h3>
-            <p>University of London, 8 course. Python for data science, statistics, clustering, dan machine learning.</p>
-          </div>
-          <button type="button" class="btn btn-dark cert-open" data-cert="dsf">Lihat ringkasan</button>
-        </li>
-        <li class="cert-row reveal">
-          <div class="cert-thumb" role="img" aria-label="Tempat pratinjau sertifikat IBM Business Analyst">Pratinjau sertifikat</div>
-          <div class="cert-main">
-            <h3>IBM Business Analyst Professional Certificate</h3>
-            <p>IBM. Process modeling, requirements gathering, stakeholder management, dan capstone project analisis bisnis.</p>
-          </div>
-          <button type="button" class="btn btn-dark cert-open" data-cert="ibm-ba">Lihat ringkasan</button>
-        </li>
-        <li class="cert-row reveal">
-          <div class="cert-thumb" role="img" aria-label="Tempat pratinjau sertifikat Excel Skills Macquarie">Pratinjau sertifikat</div>
-          <div class="cert-main">
-            <h3>Excel Skills for Data Analytics and Visualization</h3>
-            <p>Macquarie University. Advanced Excel untuk data cleaning, analysis, dan data visualization.</p>
-          </div>
-          <button type="button" class="btn btn-dark cert-open" data-cert="excel-macq">Lihat ringkasan</button>
-        </li>
-        <li class="cert-row reveal">
-          <div class="cert-thumb" role="img" aria-label="Tempat pratinjau sertifikat More Applied Data Science Michigan">Pratinjau sertifikat</div>
-          <div class="cert-main">
-            <h3>More Applied Data Science with Python</h3>
-            <p>University of Michigan. Pattern mining, recommender systems, network analysis, dan diffusion models.</p>
-          </div>
-          <button type="button" class="btn btn-dark cert-open" data-cert="michigan">Lihat ringkasan</button>
-        </li>
-        <li class="cert-row reveal">
-          <div class="cert-thumb" role="img" aria-label="Tempat pratinjau sertifikat Learn English Now ASU">Pratinjau sertifikat</div>
-          <div class="cert-main">
-            <h3>Learn English Now</h3>
-            <p>Arizona State University, 3 course. Foundations of critical thinking, problem solving, dan prediction strategies.</p>
-          </div>
-          <button type="button" class="btn btn-dark cert-open" data-cert="asu">Lihat ringkasan</button>
-        </li>
-      </ul>
-      <p class="certs-note">Petunjuk memasukkan gambar sertifikat ada di assets/README.md. File PDF sertifikat asli tetap disimpan terpisah dan bisa diminta lewat email.</p>
+        </div>
+        <div class="cred-detail" id="credDetail" aria-live="polite">
+          <p class="cred-detail-hint">Kartu berputar otomatis. Klik salah satu kartu untuk fokus ke kredensial itu dan membaca detail singkatnya di sini.</p>
+        </div>
+      </div>
+
+      <p class="certs-note">Nama kredensial tercetak langsung di cover setiap kartu. Gambar sertifikat asli bisa dipasang menggantikan cover mengikuti petunjuk di assets/README.md. File PDF sertifikat tetap disimpan terpisah dan bisa diminta lewat email.</p>
     </div>
   </section>
 
@@ -376,17 +386,6 @@
     <p class="footer-meta"><a href="#atas">Kembali ke atas</a></p>
   </div>
 </footer>
-
-<dialog class="cert-dialog" id="certDialog" aria-labelledby="certDialogTitle">
-  <div class="dialog-inner">
-    <div class="cert-thumb cert-thumb-large" id="certDialogThumb" role="img" aria-label="Tempat pratinjau sertifikat yang dipilih">Pratinjau sertifikat</div>
-    <h3 id="certDialogTitle">Sertifikat</h3>
-    <p class="dialog-issuer" id="certDialogIssuer"></p>
-    <p id="certDialogBody"></p>
-    <p id="certDialogVerify"></p>
-    <button type="button" class="btn btn-primary" id="certDialogClose">Tutup</button>
-  </div>
-</dialog>
 
 <script src="script.js"></script>
 </body>
