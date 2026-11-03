@@ -2,21 +2,26 @@
 
 Semua tempat gambar di website ini adalah placeholder berlabel. Tidak ada foto stok dan tidak ada gambar buatan yang menyamar sebagai dokumen asli.
 
-## 1. Foto profil Baghiz
+## 1. Foto profil Baghiz (ID badge)
 
-1. Siapkan satu foto potret yang jelas, rasio 4 banding 5 (misalnya 880 x 1100 piksel), format JPG.
+Foto tampil di dalam ID badge gantung pada hero.
+
+1. Siapkan satu foto potret yang jelas, rasio sekitar 10 banding 11 (misalnya 880 x 968 piksel), format JPG.
 2. Simpan file itu di folder ini dengan nama persis: `foto-baghiz.jpg`
-3. Buka `index.html`, cari komentar `TEMPAT FOTO` di section hero.
-4. Ganti seluruh blok `<figure class="photo-plate">...</figure>` dengan kode ini:
+3. Buka `index.html`, cari elemen `<div class="badge-photo" ...>` di dalam `<figure class="id-badge">`.
+4. Ganti seluruh elemen itu dengan kode ini:
 
 ```html
-<figure class="photo-plate">
-  <img src="assets/foto-baghiz.jpg" alt="Foto Baghiz Asshiddiqie Arasya" width="880" height="1100" fetchpriority="high" style="width:100%;height:auto;display:block">
-  <figcaption>Baghiz Asshiddiqie Arasya, Data Analyst.</figcaption>
-</figure>
+<img class="badge-photo-img" src="assets/foto-baghiz.jpg" alt="Foto Baghiz Asshiddiqie Arasya" width="880" height="968">
 ```
 
-5. Simpan, lalu muat ulang halaman. Foto tampil di posisi plat yang sama.
+5. Tambahkan aturan CSS ini di akhir `styles.css` sekali saja:
+
+```css
+.badge-photo-img{width:100%;aspect-ratio:4/4.4;object-fit:cover;border-radius:18px;border:1px solid var(--line);display:block}
+```
+
+6. Simpan, lalu muat ulang halaman. Foto tampil di dalam kartu, dan efek miring kartu tetap bekerja.
 
 Tips foto: latar polos, cahaya dari depan, bahu ke atas terlihat, resolusi cukup tajam saat diperbesar. Hindari filter berlebihan.
 
