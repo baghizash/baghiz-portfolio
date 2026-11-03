@@ -288,6 +288,7 @@ section[id]{scroll-margin-top:84px}
 .exp-card{
   background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-card);
   overflow:hidden;box-shadow:0 26px 50px rgba(0,0,0,.45);
+  min-height:540px;
 }
 .exp-media{
   height:118px;background:var(--panel-2);border-bottom:1px solid var(--line);
