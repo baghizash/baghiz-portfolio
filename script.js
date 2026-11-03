@@ -191,37 +191,6 @@
     });
   }
 
-  /* Salin alamat email */
-  var copyButton = document.getElementById("copyEmail");
-  var copyStatus = document.getElementById("copyStatus");
-  copyButton.addEventListener("click", function () {
-    var email = "baghiz.ash@gmail.com";
-    function done() {
-      copyStatus.textContent = "Alamat email tersalin: " + email;
-    }
-    function fallback() {
-      var ta = document.createElement("textarea");
-      ta.value = email;
-      ta.setAttribute("readonly", "");
-      ta.style.position = "absolute";
-      ta.style.left = "-9999px";
-      document.body.appendChild(ta);
-      ta.select();
-      try {
-        document.execCommand("copy");
-        done();
-      } catch (err) {
-        copyStatus.textContent = "Salin manual alamat ini: " + email;
-      }
-      document.body.removeChild(ta);
-    }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(email).then(done, fallback);
-    } else {
-      fallback();
-    }
-  });
-
   /* Reveal saat scroll */
   var revealItems = document.querySelectorAll(".reveal");
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
