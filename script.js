@@ -31,49 +31,49 @@
     "ibm-da": {
       title: "IBM Data Analyst Professional Certificate",
       issuer: "IBM, lewat Coursera. 11 course, selesai 2026.",
-      body: "Materi meliputi Excel untuk pembersihan data dan dashboard, Python dengan pandas dan NumPy, SQL dan basis data relasional, visualisasi dengan Matplotlib dan Seaborn, statistika, analisis eksploratif, dan capstone. Capstone saya menganalisis tren teknologi dari survei 65.437 developer dan hasilnya terdokumentasi sebagai repositori terpisah di GitHub.",
+      body: "Materi meliputi Excel untuk data cleaning dan dashboard, Python dengan pandas dan NumPy, SQL dan relational database, data visualization dengan Matplotlib dan Seaborn, statistics, exploratory data analysis, dan capstone. Capstone saya menganalisis tren teknologi dari survei 65.437 developer dan hasilnya terdokumentasi sebagai repositori terpisah di GitHub.",
       verify: "https://coursera.org/verify/professional-cert/DZY2HKM0VCLU"
     },
     "google-da": {
       title: "Google Data Analytics Professional Certificate",
       issuer: "Google, lewat Coursera. 8 course.",
-      body: "Materi meliputi fondasi analisis data, proses bertanya dan menyiapkan data, SQL dan BigQuery, spreadsheet, dasar R, Tableau untuk visualisasi, dan capstone studi kasus lengkap dari pembersihan data sampai presentasi temuan.",
+      body: "Materi meliputi foundations of data analytics, proses ask dan prepare data, SQL dan BigQuery, spreadsheet, dasar R, Tableau untuk data visualization, dan capstone case study lengkap dari data cleaning sampai presentation temuan.",
       verify: ""
     },
     "meta-da": {
       title: "Meta Data Analyst Professional Certificate",
       issuer: "Meta, lewat Coursera. 5 course.",
-      body: "Materi meliputi fondasi data analytics, analisis data dengan spreadsheet dan SQL, Python untuk analitik, fondasi statistika, dan manajemen data, termasuk cara data disimpan, diatur, dan dijaga kualitasnya.",
+      body: "Materi meliputi foundations of data analytics, data analysis dengan spreadsheet dan SQL, Python for analytics, foundations of statistics, dan data management, termasuk cara data disimpan, diatur, dan dijaga kualitasnya.",
       verify: ""
     },
     "dsf": {
       title: "Data Science Foundations",
       issuer: "University of London, lewat Coursera. 8 course, selesai 2026.",
-      body: "Materi meliputi Python untuk data science, statistika, clustering, dan dasar machine learning. Proyek yang saya buat meliputi analisis eksploratif autentikasi uang kertas dengan 1.372 baris data dan capstone prediksi penyewaan sepeda, keduanya terdokumentasi di GitHub beserta modul belajarnya.",
+      body: "Materi meliputi Python for data science, statistics, clustering, dan machine learning. Proyek yang saya buat meliputi exploratory data analysis pada banknote authentication dengan 1.372 baris data dan capstone bike sharing prediction, keduanya terdokumentasi di GitHub beserta modul belajarnya.",
       verify: "https://coursera.org/verify/specialization/NRPSEHDEBX9V"
     },
     "ibm-ba": {
       title: "IBM Business Analyst Professional Certificate",
       issuer: "IBM, lewat Coursera.",
-      body: "Materi meliputi pemodelan proses, pengumpulan dan dokumentasi kebutuhan, manajemen proyek dan pemangku kepentingan, dan proyek akhir tentang peningkatan efisiensi operasional rumah sakit multispesialisasi.",
+      body: "Materi meliputi process modeling, requirements gathering dan documentation, project management dan stakeholder management, dan capstone project tentang operational efficiency di rumah sakit multi specialty.",
       verify: ""
     },
     "excel-macq": {
       title: "Excel Skills for Data Analytics and Visualization",
       issuer: "Macquarie University, lewat Coursera.",
-      body: "Materi meliputi Excel tingkat lanjut untuk pembersihan dan penyiapan data, analisis dengan formula dan pivot, serta visualisasi dan dashboard untuk kebutuhan analitik.",
+      body: "Materi meliputi Advanced Excel untuk data cleaning dan data preparation, analysis dengan formula dan pivot table, serta data visualization dan dashboard untuk kebutuhan analytics.",
       verify: ""
     },
     "michigan": {
       title: "More Applied Data Science with Python",
       issuer: "University of Michigan, lewat Coursera.",
-      body: "Coursework meliputi penambangan pola dan aturan asosiasi, sistem rekomendasi dengan SVD, analisis jaringan dan sentralitas, pemetaan komunitas sains, model difusi dan epidemi, serta machine learning terapan. Setiap course menghasilkan repositori proyek dan modul tertulis di GitHub.",
+      body: "Coursework meliputi pattern mining dan association rules, recommender systems dengan SVD, network analysis dan centrality, science mapping dan community detection, diffusion dan epidemic models, serta applied machine learning. Setiap course menghasilkan repositori proyek dan modul tertulis di GitHub.",
       verify: ""
     },
     "asu": {
       title: "Learn English Now",
       issuer: "Arizona State University, lewat Coursera. 3 course.",
-      body: "Materi meliputi fondasi berpikir kritis, pemecahan masalah dan membuat prediksi, dan strategi berpikir kritis. Kemampuan ini terpakai langsung saat analisis data, terutama saat merumuskan pertanyaan yang tepat sebelum mengolah angka.",
+      body: "Materi meliputi foundations of critical thinking, problem solving dan prediction, dan critical thinking strategies. Kemampuan ini terpakai langsung saat analisis data, terutama saat merumuskan pertanyaan yang tepat sebelum mengolah angka.",
       verify: ""
     }
   };
