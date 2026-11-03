@@ -325,7 +325,6 @@ section[id]{scroll-margin-top:84px}
   padding:5px 11px;border-radius:999px;font-size:12px;font-weight:600;
   background:var(--panel-2);border:1px solid var(--line);color:var(--text);
 }
-.exp-controls{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:4px}
 @media (prefers-reduced-motion: reduce){
   .exp-slide{transition:none}
   .exp-text>*{transition:none}
