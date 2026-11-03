@@ -78,6 +78,7 @@ button,a{-webkit-tap-highlight-color:transparent}
 .section-head{max-width:720px;margin-bottom:52px}
 .section-head p:not(.section-label){margin-top:18px;font-size:17.5px;color:var(--muted)}
 .section{padding:110px 0}
+section[id]{scroll-margin-top:84px}
 
 /* Header */
 .site-header{
