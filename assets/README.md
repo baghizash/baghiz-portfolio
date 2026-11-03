@@ -58,3 +58,7 @@ Di section Sertifikat, setiap kredensial tampil sebagai kartu cover yang berputa
 ```
 
 Nama kredensial tetap terbaca dari gambar sertifikat itu sendiri, dan detail singkatnya tetap muncul di panel bawah saat kartu diklik.
+
+## 3. Gambar dashboard proyek
+
+Kartu di section Proyek memakai gambar dashboard Power BI halaman pertama dari repositori masing masing proyek, yaitu file `powerbi/dashboard_preview_halaman1.png` di repo proyek tersebut. Salinan yang tersimpan di `assets/projects/` adalah versi JPG yang dioptimalkan ukurannya (lebar 900 piksel). Kalau dashboard satu proyek berubah, unduh ulang file preview dari reponya, konversi ke JPG dengan nama yang sama di `assets/projects/`, lalu push ulang repo ini.
