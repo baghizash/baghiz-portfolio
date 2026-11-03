@@ -43,3 +43,7 @@ Nama kredensial tetap terbaca dari gambar sertifikat itu sendiri, dan detail sin
 ## 3. Gambar dashboard proyek
 
 Kartu di section Proyek memakai gambar dashboard Power BI halaman pertama dari repositori masing masing proyek, yaitu file `powerbi/dashboard_preview_halaman1.png` di repo proyek tersebut. Salinan yang tersimpan di `assets/projects/` adalah versi JPG yang dioptimalkan ukurannya (lebar 900 piksel). Kalau dashboard satu proyek berubah, unduh ulang file preview dari reponya, konversi ke JPG dengan nama yang sama di `assets/projects/`, lalu push ulang repo ini.
+
+## 4. Logo situs
+
+Logo di header adalah file `logo-baghiz.png` di folder assets: tulisan tangan "Baghiz" warna pink dengan latar transparan, dibuat dari file logo asli yang dikirim Baghiz (baghiz-color-2048.png, latar hitamnya dijadikan transparan dan gambar dipotong rapat). Di situs, logo tampil di atas pelat persegi panjang putih (kelas CSS `.wordmark` di styles.css). Kalau logo diganti, pakai PNG transparan rasio lebar sekitar 2,2 banding 1 dengan nama file yang sama.
