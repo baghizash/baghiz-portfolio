@@ -105,7 +105,7 @@
     ctx.clearRect(0, 0, W, H);
     // Garis sasaran Bank Indonesia 2,5 persen plus minus 1, batas atas 3,5 persen.
     var targetY = padT + chartH - (3.5 / max) * chartH;
-    ctx.strokeStyle = "#5A6577";
+    ctx.strokeStyle = "#2FE07C";
     ctx.lineWidth = 1;
     ctx.setLineDash([5, 5]);
     ctx.beginPath();
@@ -113,25 +113,25 @@
     ctx.lineTo(W - padR, targetY);
     ctx.stroke();
     ctx.setLineDash([]);
-    ctx.fillStyle = "#45506A";
-    ctx.font = "600 11px 'IBM Plex Sans', sans-serif";
+    ctx.fillStyle = "#2FE07C";
+    ctx.font = "600 11px 'Archivo', sans-serif";
     ctx.textAlign = "left";
     ctx.fillText("Batas atas sasaran BI 3,5%", padL + 2, targetY - 7);
     inflationData.forEach(function (d, i) {
       var barH = (d.value / max) * chartH;
       var x = padL + slot * i + (slot - barW) / 2;
       var y = padT + chartH - barH;
-      ctx.fillStyle = i === 3 ? "#C73E1D" : "#1B3A5C";
+      ctx.fillStyle = i === 3 ? "#2FE07C" : "#1F7A4D";
       ctx.fillRect(x, y, barW, barH);
-      ctx.fillStyle = "#1A2332";
-      ctx.font = "700 13px 'IBM Plex Sans', sans-serif";
+      ctx.fillStyle = "#EAF5EE";
+      ctx.font = "700 13px 'Archivo', sans-serif";
       ctx.textAlign = "center";
       ctx.fillText(d.value.toFixed(2).replace(".", ",") + "%", x + barW / 2, y - 8);
-      ctx.fillStyle = "#45506A";
-      ctx.font = "500 12px 'IBM Plex Sans', sans-serif";
+      ctx.fillStyle = "#93A89B";
+      ctx.font = "500 12px 'Archivo', sans-serif";
       ctx.fillText(d.label, x + barW / 2, padT + chartH + 22);
     });
-    ctx.fillStyle = "#1A2332";
+    ctx.fillStyle = "#EAF5EE";
     ctx.fillRect(padL, padT + chartH, chartW, 2);
   }
   drawChart();
@@ -285,3 +285,82 @@
     revealItems.forEach(function (el) { observer.observe(el); });
   }
 })();
+
+/* ===== Cabang gaya-dark-idcard: tilt ID badge + slider proyek ===== */
+const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// ID badge miring mengikuti mouse, seperti kartu gantung pada referensi video
+const badgeTiltEl = document.getElementById("badgeTilt");
+const heroSection = document.querySelector(".hero");
+if (badgeTiltEl && heroSection && !prefersReduced && window.matchMedia("(pointer: fine)").matches) {
+  let tiltRaf = null;
+  let targetY = 0, targetX = 0, curY = 0, curX = 0;
+  function animateBadgeTilt() {
+    curY += (targetY - curY) * 0.08;
+    curX += (targetX - curX) * 0.08;
+    badgeTiltEl.style.transform = "perspective(900px) rotateY(" + curY.toFixed(2) + "deg) rotateX(" + curX.toFixed(2) + "deg)";
+    if (Math.abs(targetY - curY) > 0.05 || Math.abs(targetX - curX) > 0.05) {
+      tiltRaf = requestAnimationFrame(animateBadgeTilt);
+    } else { tiltRaf = null; }
+  }
+  function kickBadgeTilt() { if (!tiltRaf) tiltRaf = requestAnimationFrame(animateBadgeTilt); }
+  heroSection.addEventListener("mousemove", (event) => {
+    const rect = badgeTiltEl.getBoundingClientRect();
+    const dx = (event.clientX - (rect.left + rect.width / 2)) / window.innerWidth;
+    const dy = (event.clientY - (rect.top + rect.height / 2)) / window.innerHeight;
+    targetY = Math.max(-11, Math.min(11, dx * 26));
+    targetX = Math.max(-9, Math.min(9, -dy * 22));
+    kickBadgeTilt();
+  });
+  heroSection.addEventListener("mouseleave", () => { targetY = 0; targetX = 0; kickBadgeTilt(); });
+}
+
+// Slider proyek unggulan (geser manual dengan tombol, titik, dan scroll snap)
+const sliderTrack = document.getElementById("sliderTrack");
+if (sliderTrack) {
+  const slideEls = Array.from(sliderTrack.children);
+  const dotsWrap = document.getElementById("sliderDots");
+  const statusEl = document.getElementById("sliderStatus");
+  const slideTitles = slideEls.map((el) => (el.getAttribute("aria-label") || "").split(": ")[1] || "");
+  let currentSlide = 0;
+  let scrollDebounce = null;
+
+  slideEls.forEach((unused, i) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "slider-dot" + (i === 0 ? " is-active" : "");
+    dot.setAttribute("aria-label", "Tampilkan proyek " + (i + 1) + ": " + slideTitles[i]);
+    dot.addEventListener("click", () => goToSlide(i));
+    dotsWrap.appendChild(dot);
+  });
+  const dotEls = Array.from(dotsWrap.children);
+
+  function setActiveSlide() {
+    dotEls.forEach((d, i) => d.classList.toggle("is-active", i === currentSlide));
+    statusEl.textContent = "Proyek " + (currentSlide + 1) + " dari " + slideEls.length + ": " + slideTitles[currentSlide];
+  }
+  function goToSlide(i) {
+    currentSlide = Math.max(0, Math.min(slideEls.length - 1, i));
+    sliderTrack.scrollTo({
+      left: slideEls[currentSlide].offsetLeft - sliderTrack.offsetLeft,
+      behavior: prefersReduced ? "auto" : "smooth"
+    });
+    setActiveSlide();
+  }
+  document.getElementById("sliderPrev").addEventListener("click", () => {
+    goToSlide((currentSlide - 1 + slideEls.length) % slideEls.length);
+  });
+  document.getElementById("sliderNext").addEventListener("click", () => {
+    goToSlide((currentSlide + 1) % slideEls.length);
+  });
+  sliderTrack.addEventListener("scroll", () => {
+    window.clearTimeout(scrollDebounce);
+    scrollDebounce = window.setTimeout(() => {
+      const idx = Math.round(sliderTrack.scrollLeft / sliderTrack.clientWidth);
+      if (idx !== currentSlide && idx >= 0 && idx < slideEls.length) {
+        currentSlide = idx;
+        setActiveSlide();
+      }
+    }, 120);
+  });
+}
