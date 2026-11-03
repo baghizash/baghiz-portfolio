@@ -439,8 +439,10 @@ if (projStage && projViewport && projTrack && projSet && projDetail) {
       max = Math.max(max, card.offsetHeight);
     });
     /* Sesuai permintaan Baghiz: tinggi kartu dipotong jadi setengah
-       dari tinggi alami terpanjang, dengan lantai aman 320px. */
-    const target = Math.max(320, Math.round(max / 2));
+       dari tinggi alami terpanjang, dengan lantai aman agar tag
+       skills tetap terlihat (376px desktop, 340px ponsel). */
+    const floor = window.innerWidth <= 720 ? 340 : 376;
+    const target = Math.max(floor, Math.round(max / 2));
     cards.forEach(function (card) { card.style.height = target + "px"; });
     stage.style.height = (target + 150) + "px";
   }
