@@ -4,26 +4,7 @@ Semua tempat gambar di website ini adalah placeholder berlabel. Tidak ada foto s
 
 ## 1. Foto profil Baghiz (ID badge)
 
-Foto tampil di dalam ID badge gantung pada hero.
-
-1. Siapkan satu foto potret yang jelas, rasio sekitar 10 banding 11 (misalnya 880 x 968 piksel), format JPG.
-2. Simpan file itu di folder ini dengan nama persis: `foto-baghiz.jpg`
-3. Buka `index.html`, cari elemen `<div class="badge-photo" ...>` di dalam `<figure class="id-badge">`.
-4. Ganti seluruh elemen itu dengan kode ini:
-
-```html
-<img class="badge-photo-img" src="assets/foto-baghiz.jpg" alt="Foto Baghiz Asshiddiqie Arasya" width="880" height="968">
-```
-
-5. Tambahkan aturan CSS ini di akhir `styles.css` sekali saja:
-
-```css
-.badge-photo-img{width:100%;aspect-ratio:4/4.4;object-fit:cover;border-radius:18px;border:1px solid var(--line);display:block}
-```
-
-6. Simpan, lalu muat ulang halaman. Foto tampil di dalam kartu, dan efek miring kartu tetap bekerja.
-
-Tips foto: latar polos, cahaya dari depan, bahu ke atas terlihat, resolusi cukup tajam saat diperbesar. Hindari filter berlebihan.
+SUDAH TERPASANG sejak 3 November 2026: file `foto-baghiz.jpg` di folder assets (743 x 817 piksel), dipotong dari foto lingkaran yang dikirim Baghiz (file asli Foto_baghiz.jpeg) mengikuti bingkai potret area foto badge. Kalau mau mengganti foto: siapkan foto potret rasio sekitar 10 banding 11, simpan dengan nama yang sama `assets/foto-baghiz.jpg`, lalu push ulang. Elemennya di index.html adalah `<img class="badge-photo-img" src="assets/foto-baghiz.jpg">` di dalam `<div class="badge-photo">`.
 
 ## 2. Gambar sertifikat (cover kartu kredensial)
 
